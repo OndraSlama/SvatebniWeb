@@ -6,10 +6,7 @@
 			<AmbientLight intensity="1" />
 
 			<GltfModel src="/models/test_doors/test_door.gltf" @load="onModelLoadReady" />
-
-			<Box :size="1" ref="moveBox" :rotation="{ y: Math.PI / 4, z: Math.PI / 4 }">
-				<LambertMaterial />
-			</Box>
+			
 		</Scene>
 	</Renderer>
 </template>
@@ -18,7 +15,6 @@
 import { ref, onMounted, watch } from "vue";
 
 const rendererC = ref();
-const moveBox = ref();
 const doorModel = ref();
 
 function onModelLoadReady(model) {
@@ -55,7 +51,6 @@ function onPointerMove(pointer) {
 	const { positionV3 } = pointer;
 
 	if (!pointerStateChanged.value) {
-		moveBox.value.mesh.position.copy(positionV3);
 		doorModel.value.rotation.y += positionV3.x - previousMousePositionX.value;
 	}
 
