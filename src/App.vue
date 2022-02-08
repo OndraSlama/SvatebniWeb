@@ -2,10 +2,10 @@
 	<Renderer ref="rendererC" antialias resize="window" :pointer="{ onMove: onPointerMove, onClick: onPointerClick }" @pointerdown="onPointerDown" @pointerup="onPointerUp">
 		<Camera :position="{ z: 10 }" />
 		<Scene>
-			<PointLight :position="{ y: 50, z: 50 }" />
-			<AmbientLight intensity="1" />
+			<PointLight :position="{ y: 10, z: 60 }" />
+			<AmbientLight intensity="3" />
 
-			<GltfModel src="/models/my_test_door/dvere.gltf" @load="onModelLoadReady" />
+			<GltfModel src="/models/my_test_door_2/dvere.gltf" @load="onModelLoadReady" />
 		</Scene>
 	</Renderer>
 </template>
