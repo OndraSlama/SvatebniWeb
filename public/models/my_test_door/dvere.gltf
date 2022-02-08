@@ -1,0 +1,461 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.7.33",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0,
+                1,
+                2,
+                3,
+                4
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Dvere_H&O_dvere v4_Dvere_Dvere",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ]
+        },
+        {
+            "mesh" : 1,
+            "name" : "Dvere_H&O_dvere v4_Hrebiky_Dvere",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ]
+        },
+        {
+            "mesh" : 2,
+            "name" : "Dvere_H&O_dvere v4_Klika_Dvere",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ]
+        },
+        {
+            "mesh" : 3,
+            "name" : "Dvere_H&O_dvere v4_Panty_Dvere",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ]
+        },
+        {
+            "mesh" : 4,
+            "name" : "Dvere_H&O_dvere v4_Obruc_Dvere.001",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "my_doow_wood",
+            "pbrMetallicRoughness" : {
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.4000000059604645
+            }
+        },
+        {
+            "doubleSided" : true,
+            "name" : "Steel_-_Satin.008",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.5
+            }
+        },
+        {
+            "doubleSided" : true,
+            "name" : "my_door_steel",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "metallicFactor" : 0.1772727221250534,
+                "roughnessFactor" : 0.6545454263687134
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Dvere_H&O_dvere v4_Dvere_Dvere",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        },
+        {
+            "name" : "Dvere_H&O_dvere v4_Hrebiky_Dvere",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 4,
+                        "NORMAL" : 5,
+                        "TEXCOORD_0" : 6
+                    },
+                    "indices" : 7,
+                    "material" : 1
+                }
+            ]
+        },
+        {
+            "name" : "Dvere_H&O_dvere v4_Klika_Dvere",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 8,
+                        "NORMAL" : 9,
+                        "TEXCOORD_0" : 10
+                    },
+                    "indices" : 11,
+                    "material" : 2
+                }
+            ]
+        },
+        {
+            "name" : "Dvere_H&O_dvere v4_Panty_Dvere",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 12,
+                        "NORMAL" : 13,
+                        "TEXCOORD_0" : 14
+                    },
+                    "indices" : 15,
+                    "material" : 2
+                }
+            ]
+        },
+        {
+            "name" : "Dvere_H&O_dvere v4_Obruc_Dvere.001",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 16,
+                        "NORMAL" : 17,
+                        "TEXCOORD_0" : 18
+                    },
+                    "indices" : 19,
+                    "material" : 2
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 3419,
+            "max" : [
+                5.812479019165039,
+                0.2199999988079071,
+                2.774477958679199
+            ],
+            "min" : [
+                -0.09686499834060669,
+                -0.009999999776482582,
+                -2.8065860271453857
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 3419,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 3419,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 10170,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5126,
+            "count" : 13620,
+            "max" : [
+                5.492741107940674,
+                0.25,
+                2.484287977218628
+            ],
+            "min" : [
+                0.12750199437141418,
+                0,
+                -2.6255290508270264
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5126,
+            "count" : 13620,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 13620,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 7,
+            "componentType" : 5123,
+            "count" : 41520,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 8,
+            "componentType" : 5126,
+            "count" : 978,
+            "max" : [
+                4.368895053863525,
+                0.4699999988079071,
+                0.43914398550987244
+            ],
+            "min" : [
+                3.8626980781555176,
+                0,
+                -0.15380799770355225
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 9,
+            "componentType" : 5126,
+            "count" : 978,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 10,
+            "componentType" : 5126,
+            "count" : 978,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 11,
+            "componentType" : 5123,
+            "count" : 3474,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 12,
+            "componentType" : 5126,
+            "count" : 6496,
+            "max" : [
+                2.529879093170166,
+                0.2800000011920929,
+                1.7494369745254517
+            ],
+            "min" : [
+                -0.06500200182199478,
+                0,
+                -1.5664340257644653
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 13,
+            "componentType" : 5126,
+            "count" : 6496,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 14,
+            "componentType" : 5126,
+            "count" : 6496,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 15,
+            "componentType" : 5123,
+            "count" : 20388,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 16,
+            "componentType" : 5126,
+            "count" : 74691,
+            "max" : [
+                5.8224968910217285,
+                0.23499999940395355,
+                2.7845449447631836
+            ],
+            "min" : [
+                -0.10680299997329712,
+                0,
+                -2.816585063934326
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 17,
+            "componentType" : 5126,
+            "count" : 74691,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 18,
+            "componentType" : 5126,
+            "count" : 74691,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 19,
+            "componentType" : 5125,
+            "count" : 413286,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 41028,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 41028,
+            "byteOffset" : 41028
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 27352,
+            "byteOffset" : 82056
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 20340,
+            "byteOffset" : 109408
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 163440,
+            "byteOffset" : 129748
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 163440,
+            "byteOffset" : 293188
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 108960,
+            "byteOffset" : 456628
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 83040,
+            "byteOffset" : 565588
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 11736,
+            "byteOffset" : 648628
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 11736,
+            "byteOffset" : 660364
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 7824,
+            "byteOffset" : 672100
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 6948,
+            "byteOffset" : 679924
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 77952,
+            "byteOffset" : 686872
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 77952,
+            "byteOffset" : 764824
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 51968,
+            "byteOffset" : 842776
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 40776,
+            "byteOffset" : 894744
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 896292,
+            "byteOffset" : 935520
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 896292,
+            "byteOffset" : 1831812
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 597528,
+            "byteOffset" : 2728104
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1653144,
+            "byteOffset" : 3325632
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 4978776,
+            "uri" : "dvere.bin"
+        }
+    ]
+}
