@@ -1,0 +1,242 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.7.33",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0,
+                1
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Stromy_H&O_dvere v6_Body1_Stromy",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ]
+        },
+        {
+            "mesh" : 1,
+            "name" : "Stromy_H&O_dvere v6_Body2_Stromy.001",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "my_tree",
+            "normalTexture" : {
+                "index" : 0,
+                "scale" : 4
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 1
+                },
+                "metallicFactor" : 0,
+                "metallicRoughnessTexture" : {
+                    "index" : 2
+                }
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Stromy_H&O_dvere v6_Body1_Stromy",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        },
+        {
+            "name" : "Stromy_H&O_dvere v6_Body2_Stromy.001",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 4,
+                        "NORMAL" : 5,
+                        "TEXCOORD_0" : 6
+                    },
+                    "indices" : 7,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        },
+        {
+            "sampler" : 0,
+            "source" : 1
+        },
+        {
+            "sampler" : 0,
+            "source" : 2
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Bark003_2K_NormalDX",
+            "uri" : "textures/Bark003_2K_NormalDX.jpg"
+        },
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Metal029_2K_Color",
+            "uri" : "textures/Metal029_2K_Color.jpg"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "Bark003_2K_Roughness",
+            "uri" : "textures/Bark003_2K_Roughness.png"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 10450,
+            "max" : [
+                6.460844039916992,
+                0.15000000596046448,
+                3.86368989944458
+            ],
+            "min" : [
+                -1.036620020866394,
+                0,
+                1.957502007484436
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 10450,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 10450,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 30696,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5126,
+            "count" : 26224,
+            "max" : [
+                7.090456008911133,
+                0.15000000596046448,
+                2.37750506401062
+            ],
+            "min" : [
+                -1.3606810569763184,
+                0,
+                -5.421358108520508
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5126,
+            "count" : 26224,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 26224,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 7,
+            "componentType" : 5123,
+            "count" : 81738,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 125400,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 125400,
+            "byteOffset" : 125400
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 83600,
+            "byteOffset" : 250800
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 61392,
+            "byteOffset" : 334400
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 314688,
+            "byteOffset" : 395792
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 314688,
+            "byteOffset" : 710480
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 209792,
+            "byteOffset" : 1025168
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 163476,
+            "byteOffset" : 1234960
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 1398436,
+            "uri" : "stromy.bin"
+        }
+    ]
+}

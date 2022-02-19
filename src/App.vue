@@ -1,34 +1,40 @@
 <template>
-	<Renderer ref="rendererC" antialias resize="window" :pointer="{ onMove: onPointerMove, onClick: onPointerClick }" @pointerdown="onPointerDown" @pointerup="onPointerUp">
-		<Camera :position="{ z: 10 }" />
-		<Scene>
-			<PointLight :position="{ y: 10, z: 60 }" />
-			<AmbientLight intensity="3" />
+	<Renderer ref="rendererC" antialias resize="window" :pointer="{ onMove: onPointerMove, onClick: onPointerClick }" @pointerdown="onPointerDown" @pointerup="onPointerUp" shadow>
+		<Camera :position="DEFAULT_CAMERA_POSITION"/>
+		<Scene background="#1c1c1c">
+			<PointLight ref="pointLight" :intensity="0.2" :position="DEFAULT_LIGHT_POSITION">
+				<Sphere :radius="0.1" />
+			</PointLight>
 
-			<GltfModel src="/models/my_test_door_2/dvere.gltf" @load="onModelLoadReady" />
+			 <!-- <RectAreaLight color="#60ff60" :position="DEFAULT_LIGHT_POSITION" v-bind="rectLightsProps" /> -->
+
+			<AmbientLight :intensity="4" />
+
+			<GltfModel src="/models/my_test_door_2/dvere.gltf" @load="onDoorModelLoadReady" />
+			<GltfModel src="/models/trees/stromy.gltf" @load="onTreesModelLoadReady" />
+			<GltfModel src="/models/sign/cedule.gltf" @load="onSignModelLoadReady" />
+
 		</Scene>
+		
 	</Renderer>
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from "vue";
+import {Raycaster, Vector3} from 'three';
+
+// Constants
+const DEFAULT_CAMERA_POSITION = { x: 0, y: 0, z: 20 };
+const DEFAULT_LIGHT_POSITION = { x: -5, y: 3, z: 20 };
+const MODELS_X_OFFSET = -2.83;
+const SLOW_OPEN_SPEED = 0.01;
+const MEDIUM_OPEN_SPEED = 0.05;
+const FAST_OPEN_SPEED = 0.1;
 
 const rendererC = ref();
-const doorModel = ref();
+const pointLight = ref();
 
-function onModelLoadReady(model) {
-	console.log("Ready");
-	doorModel.value = model;
-	console.log(doorModel.value);
-	model.traverse((o) => {
-		if (o.isMesh) {
-			// handle both multiple and single materials
-			const asArray = Array.isArray(o.material) ? o.material : [o.material];
-			// 0 works for matte materials - change as needed
-			asArray.forEach((mat) => (mat.metalness = 0));
-		}
-	});
-}
+const raycaster = ref(new Raycaster());
 
 onMounted(() => {
 	const renderer = rendererC.value;
@@ -37,112 +43,224 @@ onMounted(() => {
 	});
 });
 
-//Door logic
-let openedAngleThreshold = -Math.PI * 0.5;
-let maxAngle = -Math.PI * 0.7;
-const targetDoorAngle = ref(0);
-const currentDoorAngle = ref(0);
-const responsiveFactor = ref(0);
-const isDoorOpen = ref(false);
-const cameraIntegrationFActor = ref(0);
+
+const doorModel = ref();
+const treesModel = ref();
+const signModel = ref();
+function onTreesModelLoadReady(model) {
+	treesModel.value = model;
+	modelFix(model);
+}
+
+function onSignModelLoadReady(model) {
+	signModel.value = model;
+	modelFix(model);
+}
+
+function onDoorModelLoadReady(model) {
+	console.log("Ready");
+	doorModel.value = model;
+
+	console.log(doorModel.value);
+	console.log(pointLight.value);
+	modelFix(model);
+}
+
+function modelFix(model){
+	model.traverse((o) => {
+		if (o.isMesh) {
+			// handle both multiple and single materials
+			const asArray = Array.isArray(o.material) ? o.material : [o.material];
+			// 0 works for matte materials - change as needed
+			asArray.forEach((mat) => (mat.metalness = 0));
+
+			o.castShadow = true;
+			o.receiveShadow = true;
+		}
+	});
+}
+
+//----------------------------- Main logic -----------------------------
+const door = ref({
+	targetAngle: 0,
+	currentAngle: 0,
+	maxAngle: -Math.PI * 0.7,
+	openedAngleThreshold: -Math.PI * 0.5,
+	clickedOnDoor: false,
+	isOpened: false,
+	responsiveFactor: 0
+})
+
+const camera = ref({
+	targetPosition: DEFAULT_CAMERA_POSITION,
+	zoomIntegrationFactor: 0,
+	moveFactor: 0.01
+})
 
 function animate() {
-	// If model is not lodaded
-	if (!doorModel.value) {
+
+	if (!doorModel.value) { 	// If model is not lodaded	
 		return;
 	}
 
-	if (isDoorOpen.value){
-		targetDoorAngle.value = maxAngle;
-		responsiveFactor.value = 0.01;
+	if (door.value.isOpened){
+		door.value.targetAngle = door.value.maxAngle;
+		door.value.responsiveFactor = SLOW_OPEN_SPEED;
 	} 
 
-	doorModel.value.rotation.y += (targetDoorAngle.value - currentDoorAngle.value) * responsiveFactor.value;
-	doorModel.value.rotation.y = Math.min(Math.max(doorModel.value.rotation.y, maxAngle), 0);
+	doorModel.value.position.x = MODELS_X_OFFSET;	
+	treesModel.value.position.x = MODELS_X_OFFSET;	
+	signModel.value.position.x = 1.15;	
+	signModel.value.position.z = 1;	
+	// treesModel.value.position.z = -0.1;	
+
+	doorModel.value.rotation.y += (door.value.targetAngle - door.value.currentAngle) * door.value.responsiveFactor;
+	doorModel.value.rotation.y = Math.min(Math.max(doorModel.value.rotation.y, door.value.maxAngle), 0);
+
+	rendererC.value.camera.position.x += (camera.value.targetPosition.x - rendererC.value.camera.position.x) * camera.value.moveFactor;
+	rendererC.value.camera.position.y += (camera.value.targetPosition.y - rendererC.value.camera.position.y) * camera.value.moveFactor;
 
 
-	// Move camera closer until end
-	if (isDoorOpen.value) {	
-
-		rendererC.value.camera.position.z += cameraIntegrationFActor.value;
-		console.log(rendererC.value.camera.position.z);
-	}
-
-	if (rendererC.value.camera.position.z < 0) {
-		rendererC.value.camera.position.z = 10;		
-		doorModel.value.rotation.y = -1.3;
-		targetDoorAngle.value = 0;
-		isDoorOpen.value = false;
-	}
-
-	currentDoorAngle.value = doorModel.value.rotation.y;
+	moveCameraWhenDoorOpens();
+		
+  	door.value.currentAngle=doorModel.value.rotation.y;
 }
 
-watch(currentDoorAngle, (newValue) => {
-	if (newValue < openedAngleThreshold) {
+function openDoor() {
+  door.value.targetAngle=door.value.maxAngle;
+  door.value.responsiveFactor = SLOW_OPEN_SPEED;
+}
+
+function moveCameraWhenDoorOpens() {
+  if(door.value.isOpened) {
+    rendererC.value.camera.position.z+=camera.value.zoomIntegrationFactor;
+    console.log(rendererC.value.camera.position.z);
+  }
+
+  if(rendererC.value.camera.position.z<0) {
+    rendererC.value.camera.position.z=DEFAULT_CAMERA_POSITION.z;
+    doorModel.value.rotation.y=-1.3;
+    door.value.targetAngle=0;
+    door.value.isOpened=false;
+  }
+}
+
+watch( () => door.value.currentAngle, (newValue) => {
+	if (newValue < door.value.openedAngleThreshold) {
 		// console.log("Door open: ", newValue);
-		isDoorOpen.value = true;		
+		door.value.isOpened = true;		
 	}
 });
 
-const cameraTimer = ref();
-watch(isDoorOpen, (newValue) => {
+let cameraTimer;
+watch(() => door.value.isOpened, (newValue) => {
 	if (newValue) {
-		cameraTimer.value = setInterval(() => {
-			cameraIntegrationFActor.value -= 0.002;
+		cameraTimer = setInterval(() => {
+			camera.value.zoomIntegrationFactor -= 0.002;
 		}, 50)
 	}else{
-		cameraIntegrationFActor.value = 0;
-		clearInterval(cameraTimer.value)
+		camera.value.zoomIntegrationFactor = 0;
+		clearInterval(cameraTimer)
 	}
 });
 
-// Mouse events
-const previousMousePositionX = ref(0);
-const pointerIsDown = ref();
-const pointerStateChanged = ref();
-watch(pointerIsDown, (state) => {
-	console.log(state);
-});
+//----------------------------- Mouse events -----------------------------
+const myPointer = ref({
+	isDown: false,
+	position: { x: 0, y: 0 },
+	lastX: 0,
+	lastY: 0,
+	stateChanged: false,
+	moveFactor: 0.35
+})
+// watch(() => myPointer.value.isDown, (state) => {
+// 	console.log(state);
+// });
+
+
 
 function onPointerMove(pointer) {
-	if (!pointerIsDown.value) return;
-
 	const { positionV3 } = pointer;
-
-	if (!pointerStateChanged.value) {
-		targetDoorAngle.value += positionV3.x - previousMousePositionX.value;
-	}
-
-	previousMousePositionX.value = positionV3.x;
-	pointerStateChanged.value = false;
+	myPointer.value.position = {"x": positionV3.x, "y": positionV3.y};
+	determineDoorTargetAngle(positionV3);
+	// determineCameraTargetPos(positionV3);
+	// movePointLight(positionV3);
+	
 }
 
 function onPointerDown() {
-	pointerIsDown.value = true;
-	responsiveFactor.value = 0.1;
-	pointerStateChanged.value = true;
-	console.log("mouse down");
+	myPointer.value.isDown = true;
+	door.value.responsiveFactor = FAST_OPEN_SPEED;
+	myPointer.value.stateChanged = true;
+	console.log("pointer down");
 }
 
 function onPointerUp() {
-	pointerIsDown.value = false;
-	// targetDoorAngle.value = 0;
-	// responsiveFactor.value = 0.02;
-	console.log("mouse up");
+	myPointer.value.isDown = false;
+	door.value.clickedOnDoor = false;
+	// door.value.targetAngle = 0;
+	// door.value.responsiveFactor = 0.02;
+	console.log("pointer up");
 }
 
 function onPointerClick() {
-	console.log("mouse clicked");
-	if (pointerStateChanged.value) {
-		targetDoorAngle.value = maxAngle;
-		responsiveFactor.value = 0.01;
+	console.log("pointer clicked");
+	if (myPointer.value.stateChanged && intersectsDoor()) {
+		openDoor();
 	}
+}
+
+
+function intersectsDoor(){
+	// console.log("intersects search for: ", myPointer.value.position);
+	let {x, y} = myPointer.value.position;
+	return x < 3 && x > -3 && y < 2.8 && y > -2.8;
+}
+
+function movePointLight(positionV3) {
+	const { x, y, z } = positionV3;
+	pointLight.value.light.position.x = DEFAULT_LIGHT_POSITION.x + x;
+	pointLight.value.light.position.y = DEFAULT_LIGHT_POSITION.y + y;
+	pointLight.value.light.position.z = 10 + 40 * getRelativeHeightOnSphere(x, 10);
+}
+
+function determineCameraTargetPos(positionV3) {
+	const { x, y, z } = positionV3;
+	camera.value.targetPosition.x = -x*0.1;
+	camera.value.targetPosition.y = -y*0.1;
+}
+
+function getRelativeHeightOnSphere(x, sphereRadius){
+	return Math.cos((Math.PI/2)*Math.min(Math.abs(x), sphereRadius)/sphereRadius) ;
+}
+
+function determineDoorTargetAngle(pointerPos){
+	if (!myPointer.value.isDown){
+		door.value.responsiveFactor = MEDIUM_OPEN_SPEED;
+		door.value.targetAngle = intersectsDoor() ? -0.3 : 0;	
+		return;
+	}
+
+
+	if (myPointer.value.stateChanged) {
+		door.value.clickedOnDoor = intersectsDoor();
+	}else if (door.value.clickedOnDoor){
+		console.log("opening door")
+		door.value.targetAngle += (pointerPos.x - myPointer.value.lastX) * myPointer.value.moveFactor;
+	}
+
+	if (door.value.targetAngle > 0) {
+		door.value.targetAngle = 0;
+	}
+
+	myPointer.value.lastX = pointerPos.x;
+	myPointer.value.stateChanged = false;
+
 }
 
 // animate() {
 // 	const { pointer } = this.renderer.three;
-// 	this.target.copy(pointer.positionV3);
+// 	this.target.copy(myPointer.positionV3);
 // 	this.light.position.copy(this.target);
 
 // 	for (let i = 0; i < this.NUM_INSTANCES; i++) {
