@@ -1,5 +1,5 @@
 <template>
-	<Renderer ref="rendererC" antialias resize="window" :pointer="{ onMove: onPointerMove, onClick: onPointerClick }" @pointerdown="onPointerDown" @pointerup="onPointerUp" shadow>
+	<Renderer ref="rendererC" antialias resize="window" :pointer="{ onMove: onPointerMove, onClick: onPointerClick }" @pointerdown="onPointerDown" @pointerup="onPointerUp">
 		<Camera :position="DEFAULT_CAMERA_POSITION"/>
 		<Scene background="#1c1c1c">
 			<PointLight ref="pointLight" :intensity="0.2" :position="DEFAULT_LIGHT_POSITION">
@@ -9,10 +9,14 @@
 			 <!-- <RectAreaLight color="#60ff60" :position="DEFAULT_LIGHT_POSITION" v-bind="rectLightsProps" /> -->
 
 			<AmbientLight :intensity="4" />
+			<Plane ref="rotationPlane" :position="{x: MODELS_X_OFFSET}" :width="0" :height="0">
+				<GltfModel src="/models/my_test_door_2/dvere.gltf" @load="onDoorModelLoadReady" />
+				<GltfModel src="/models/sign/cedule.gltf" @load="onSignModelLoadReady" />	
+			</Plane>
 
-			<GltfModel src="/models/my_test_door_2/dvere.gltf" @load="onDoorModelLoadReady" />
 			<GltfModel src="/models/trees/stromy.gltf" @load="onTreesModelLoadReady" />
-			<GltfModel src="/models/sign/cedule.gltf" @load="onSignModelLoadReady" />
+
+
 
 		</Scene>
 		
@@ -27,6 +31,7 @@ import {Raycaster, Vector3} from 'three';
 const DEFAULT_CAMERA_POSITION = { x: 0, y: 0, z: 20 };
 const DEFAULT_LIGHT_POSITION = { x: -5, y: 3, z: 20 };
 const MODELS_X_OFFSET = -2.83;
+const SIGN_X_OFFEST = 4.15;
 const SLOW_OPEN_SPEED = 0.01;
 const MEDIUM_OPEN_SPEED = 0.05;
 const FAST_OPEN_SPEED = 0.1;
@@ -38,7 +43,7 @@ const raycaster = ref(new Raycaster());
 
 onMounted(() => {
 	const renderer = rendererC.value;
-	renderer.onBeforeRender(() => {
+	renderer.onBeforeRender(() => {		
 		animate();
 	});
 });
@@ -47,6 +52,8 @@ onMounted(() => {
 const doorModel = ref();
 const treesModel = ref();
 const signModel = ref();
+const rotationPlane = ref();
+
 function onTreesModelLoadReady(model) {
 	treesModel.value = model;
 	modelFix(model);
@@ -55,14 +62,13 @@ function onTreesModelLoadReady(model) {
 function onSignModelLoadReady(model) {
 	signModel.value = model;
 	modelFix(model);
+	// console.log("Sign:")
+	// console.log(signModel.value);
 }
 
 function onDoorModelLoadReady(model) {
 	console.log("Ready");
 	doorModel.value = model;
-
-	console.log(doorModel.value);
-	console.log(pointLight.value);
 	modelFix(model);
 }
 
@@ -108,14 +114,14 @@ function animate() {
 		door.value.responsiveFactor = SLOW_OPEN_SPEED;
 	} 
 
-	doorModel.value.position.x = MODELS_X_OFFSET;	
-	treesModel.value.position.x = MODELS_X_OFFSET;	
-	signModel.value.position.x = 1.15;	
-	signModel.value.position.z = 1;	
+	// doorModel.value.position.x = MODELS_X_OFFSET;	
+	treesModel.value.position.x = MODELS_X_OFFSET;		
+	signModel.value.position.x = SIGN_X_OFFEST;	
+	// signModel.value.position.z = 1;	
 	// treesModel.value.position.z = -0.1;	
 
-	doorModel.value.rotation.y += (door.value.targetAngle - door.value.currentAngle) * door.value.responsiveFactor;
-	doorModel.value.rotation.y = Math.min(Math.max(doorModel.value.rotation.y, door.value.maxAngle), 0);
+	rotationPlane.value.mesh.rotation.y += (door.value.targetAngle - door.value.currentAngle) * door.value.responsiveFactor;
+	rotationPlane.value.mesh.rotation.y = Math.min(Math.max(rotationPlane.value.mesh.rotation.y, door.value.maxAngle), 0);
 
 	rendererC.value.camera.position.x += (camera.value.targetPosition.x - rendererC.value.camera.position.x) * camera.value.moveFactor;
 	rendererC.value.camera.position.y += (camera.value.targetPosition.y - rendererC.value.camera.position.y) * camera.value.moveFactor;
@@ -123,7 +129,7 @@ function animate() {
 
 	moveCameraWhenDoorOpens();
 		
-  	door.value.currentAngle=doorModel.value.rotation.y;
+  	door.value.currentAngle=rotationPlane.value.mesh.rotation.y;
 }
 
 function openDoor() {
@@ -139,7 +145,7 @@ function moveCameraWhenDoorOpens() {
 
   if(rendererC.value.camera.position.z<0) {
     rendererC.value.camera.position.z=DEFAULT_CAMERA_POSITION.z;
-    doorModel.value.rotation.y=-1.3;
+    rotationPlane.value.mesh.rotation.y=-1.3;
     door.value.targetAngle=0;
     door.value.isOpened=false;
   }
