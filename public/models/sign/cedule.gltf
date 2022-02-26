@@ -68,7 +68,7 @@
             "name" : "gltf_my_sign",
             "normalTexture" : {
                 "index" : 3,
-                "scale" : 3.1999998092651367
+                "scale" : 0
             },
             "pbrMetallicRoughness" : {
                 "baseColorTexture" : {
@@ -154,33 +154,33 @@
     "images" : [
         {
             "mimeType" : "image/jpeg",
-            "name" : "Metal029_2K_NormalDX",
-            "uri" : "textures/Metal029_2K_NormalDX.jpg"
+            "name" : "Metal029_1K_NormalDX",
+            "uri" : "textures/Metal029_1K_NormalDX.jpg"
         },
         {
             "mimeType" : "image/jpeg",
-            "name" : "Metal029_2K_Color",
-            "uri" : "textures/Metal029_2K_Color.jpg"
+            "name" : "Metal029_1K_Color",
+            "uri" : "textures/Metal029_1K_Color.jpg"
         },
         {
             "mimeType" : "image/png",
-            "name" : "Metal029_2K_Metalness-Metal029_2K_Roughness",
-            "uri" : "textures/Metal029_2K_Metalness-Metal029_2K_Roughness.png"
+            "name" : "Metal029_1K_Metalness-Metal029_1K_Roughness",
+            "uri" : "textures/Metal029_1K_Metalness-Metal029_1K_Roughness.png"
         },
         {
             "mimeType" : "image/jpeg",
-            "name" : "Wood060_2K_NormalDX",
-            "uri" : "textures/Wood060_2K_NormalDX.jpg"
+            "name" : "Wood060_1K_NormalDX",
+            "uri" : "textures/Wood060_1K_NormalDX.jpg"
         },
         {
             "mimeType" : "image/jpeg",
-            "name" : "Wood060_2K_Color",
-            "uri" : "textures/Wood060_2K_Color.jpg"
+            "name" : "Wood060_1K_Color",
+            "uri" : "textures/Wood060_1K_Color.jpg"
         },
         {
             "mimeType" : "image/png",
-            "name" : "Wood060_2K_Roughness",
-            "uri" : "textures/Wood060_2K_Roughness.png"
+            "name" : "Wood060_1K_Roughness",
+            "uri" : "textures/Wood060_1K_Roughness.png"
         }
     ],
     "accessors" : [

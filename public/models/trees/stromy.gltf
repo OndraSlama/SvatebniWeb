@@ -41,7 +41,7 @@
             "name" : "my_tree",
             "normalTexture" : {
                 "index" : 0,
-                "scale" : 4
+                "scale" : 8.59999942779541
             },
             "pbrMetallicRoughness" : {
                 "baseColorTexture" : {
@@ -101,18 +101,18 @@
     "images" : [
         {
             "mimeType" : "image/jpeg",
-            "name" : "Bark003_2K_NormalDX",
-            "uri" : "textures/Bark003_2K_NormalDX.jpg"
+            "name" : "Wood011_1K_NormalDX",
+            "uri" : "textures/Wood011_1K_NormalDX.jpg"
         },
         {
             "mimeType" : "image/jpeg",
-            "name" : "Metal029_2K_Color",
-            "uri" : "textures/Metal029_2K_Color.jpg"
+            "name" : "Metal029_1K_Color",
+            "uri" : "textures/Metal029_1K_Color.jpg"
         },
         {
             "mimeType" : "image/png",
-            "name" : "Bark003_2K_Roughness",
-            "uri" : "textures/Bark003_2K_Roughness.png"
+            "name" : "Wood011_1K_Roughness",
+            "uri" : "textures/Wood011_1K_Roughness.png"
         }
     ],
     "accessors" : [

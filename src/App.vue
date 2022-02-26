@@ -2,21 +2,20 @@
 	<Renderer ref="rendererC" antialias resize="window" :pointer="{ onMove: onPointerMove, onClick: onPointerClick }" @pointerdown="onPointerDown" @pointerup="onPointerUp">
 		<Camera :position="DEFAULT_CAMERA_POSITION"/>
 		<Scene background="#1c1c1c">
-			<PointLight ref="pointLight" :intensity="0.2" :position="DEFAULT_LIGHT_POSITION">
+			<PointLight ref="pointLight" :intensity="0.4" :position="DEFAULT_LIGHT_POSITION">
 				<Sphere :radius="0.1" />
 			</PointLight>
 
 			 <!-- <RectAreaLight color="#60ff60" :position="DEFAULT_LIGHT_POSITION" v-bind="rectLightsProps" /> -->
 
-			<AmbientLight :intensity="4" />
+			<AmbientLight :intensity="3" />
 			<Plane ref="rotationPlane" :position="{x: MODELS_X_OFFSET}" :width="0" :height="0">
-				<GltfModel src="/models/my_test_door_2/dvere.gltf" @load="onDoorModelLoadReady" />
+				<GltfModel src="/models/door/dvere.gltf" @load="onDoorModelLoadReady" />
 				<GltfModel src="/models/sign/cedule.gltf" @load="onSignModelLoadReady" />	
 			</Plane>
 
 			<GltfModel src="/models/trees/stromy.gltf" @load="onTreesModelLoadReady" />
-
-
+			<GltfModel src="/models/text/text.gltf" @load="onTextModelLoadReady" />
 
 		</Scene>
 		
@@ -24,34 +23,78 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import {Raycaster, Vector3} from 'three';
 
 // Constants
 const DEFAULT_CAMERA_POSITION = { x: 0, y: 0, z: 20 };
 const DEFAULT_LIGHT_POSITION = { x: -5, y: 3, z: 20 };
+const TEXT_POSITION = { x: -4.5, y: -4, z: 3 };
 const MODELS_X_OFFSET = -2.83;
 const SIGN_X_OFFEST = 4.15;
 const SLOW_OPEN_SPEED = 0.01;
 const MEDIUM_OPEN_SPEED = 0.05;
 const FAST_OPEN_SPEED = 0.1;
 
+const TIMER_PERIOD = 20; // milliseconds 
+const SWING_PERIOD = 3000; // milliseconds
+const SIGN_ANGLE_FIX_FACTOR = 4.34;
+const SIGN_INITIAL_ANGLE = -Math.PI *0.1 * SIGN_ANGLE_FIX_FACTOR;
+
+// Refs
 const rendererC = ref();
 const pointLight = ref();
 
-const raycaster = ref(new Raycaster());
+// Timer
+let simulationTimer = null;
+let elapsedTime = 0;
+
 
 onMounted(() => {
+	// Start timer
+	simulationTimer = setInterval(() => {
+		// Update time
+		elapsedTime += TIMER_PERIOD;
+		calculatePhysics();
+	}, TIMER_PERIOD);
+
 	const renderer = rendererC.value;
 	renderer.onBeforeRender(() => {		
 		animate();
 	});
 });
 
+onUnmounted(() => {
+	// Stop timer
+	clearInterval(simulationTimer);
+	clearInterval(cameraTimer);
+})
+
+const dampeningPerCycle = Math.pow(0.6, TIMER_PERIOD / 1000);
+function calculatePhysics(){
+	// Calculate swinging motion of the sign
+	sign.value.angleAccel = -Math.sin(sign.value.targetAngle/SIGN_ANGLE_FIX_FACTOR) * 50;
+	
+	// Calculate angle speed of the door
+	door.value.angleSpeed = (door.value.currentAngle - door.value.prevAngle)/(TIMER_PERIOD/1000)
+	if (Math.abs(door.value.angleSpeed) < 0.01){
+		door.value.angleSpeed = 0;
+	}
+	door.value.prevAngle = door.value.currentAngle;
+
+	sign.value.angleAccel += 200* Math.abs(door.value.angleSpeed) * ( TIMER_PERIOD / 1000)
+	console.log(sign.value.targetAngle);	
+	
+	sign.value.angleSpeed += sign.value.angleAccel*(TIMER_PERIOD/1000);
+	sign.value.angleSpeed *= dampeningPerCycle;
+	sign.value.targetAngle += sign.value.angleSpeed*(TIMER_PERIOD/1000);
+}
+
 
 const doorModel = ref();
 const treesModel = ref();
 const signModel = ref();
+const textModel = ref();
 const rotationPlane = ref();
 
 function onTreesModelLoadReady(model) {
@@ -62,8 +105,10 @@ function onTreesModelLoadReady(model) {
 function onSignModelLoadReady(model) {
 	signModel.value = model;
 	modelFix(model);
-	// console.log("Sign:")
-	// console.log(signModel.value);
+}
+function onTextModelLoadReady(model) {
+	textModel.value = model;
+	modelFix(model, 0.85);
 }
 
 function onDoorModelLoadReady(model) {
@@ -72,13 +117,13 @@ function onDoorModelLoadReady(model) {
 	modelFix(model);
 }
 
-function modelFix(model){
+function modelFix(model, metalness=0.3){
 	model.traverse((o) => {
 		if (o.isMesh) {
 			// handle both multiple and single materials
 			const asArray = Array.isArray(o.material) ? o.material : [o.material];
 			// 0 works for matte materials - change as needed
-			asArray.forEach((mat) => (mat.metalness = 0));
+			asArray.forEach((mat) => (mat.metalness = metalness));
 
 			o.castShadow = true;
 			o.receiveShadow = true;
@@ -90,6 +135,8 @@ function modelFix(model){
 const door = ref({
 	targetAngle: 0,
 	currentAngle: 0,
+	prevAngle: 0,
+	angleSpeed: 0,
 	maxAngle: -Math.PI * 0.7,
 	openedAngleThreshold: -Math.PI * 0.5,
 	clickedOnDoor: false,
@@ -103,6 +150,15 @@ const camera = ref({
 	moveFactor: 0.01
 })
 
+const sign = ref({
+	targetAngle: SIGN_INITIAL_ANGLE,
+	currentAngle: 0,
+	angleSpeed: 0,
+	angleAccel: 0,
+	maxAngle: -Math.PI * 0.7,
+	responsiveFactor: 0.3
+})
+
 function animate() {
 
 	if (!doorModel.value) { 	// If model is not lodaded	
@@ -112,16 +168,20 @@ function animate() {
 	if (door.value.isOpened){
 		door.value.targetAngle = door.value.maxAngle;
 		door.value.responsiveFactor = SLOW_OPEN_SPEED;
-	} 
 
-	// doorModel.value.position.x = MODELS_X_OFFSET;	
+	} 
 	treesModel.value.position.x = MODELS_X_OFFSET;		
 	signModel.value.position.x = SIGN_X_OFFEST;	
-	// signModel.value.position.z = 1;	
-	// treesModel.value.position.z = -0.1;	
+	// textModel.value.position = TEXT_POSITION;	
+	textModel.value.position.x = TEXT_POSITION.x;	
+	textModel.value.position.y = TEXT_POSITION.y;	
+	textModel.value.position.z = TEXT_POSITION.z;	
+	textModel.value.rotation.x = -0.35;	
 
 	rotationPlane.value.mesh.rotation.y += (door.value.targetAngle - door.value.currentAngle) * door.value.responsiveFactor;
 	rotationPlane.value.mesh.rotation.y = Math.min(Math.max(rotationPlane.value.mesh.rotation.y, door.value.maxAngle), 0);
+
+	signModel.value.rotation.z = (sign.value.targetAngle - sign.value.currentAngle) * sign.value.responsiveFactor;
 
 	rendererC.value.camera.position.x += (camera.value.targetPosition.x - rendererC.value.camera.position.x) * camera.value.moveFactor;
 	rendererC.value.camera.position.y += (camera.value.targetPosition.y - rendererC.value.camera.position.y) * camera.value.moveFactor;
@@ -130,6 +190,7 @@ function animate() {
 	moveCameraWhenDoorOpens();
 		
   	door.value.currentAngle=rotationPlane.value.mesh.rotation.y;
+	sign.value.currentAngle=signModel.value.rotation.z;
 }
 
 function openDoor() {
@@ -189,8 +250,8 @@ function onPointerMove(pointer) {
 	const { positionV3 } = pointer;
 	myPointer.value.position = {"x": positionV3.x, "y": positionV3.y};
 	determineDoorTargetAngle(positionV3);
-	// determineCameraTargetPos(positionV3);
-	// movePointLight(positionV3);
+	determineCameraTargetPos(positionV3);
+	movePointLight(positionV3);
 	
 }
 
@@ -225,15 +286,15 @@ function intersectsDoor(){
 
 function movePointLight(positionV3) {
 	const { x, y, z } = positionV3;
-	pointLight.value.light.position.x = DEFAULT_LIGHT_POSITION.x + x;
-	pointLight.value.light.position.y = DEFAULT_LIGHT_POSITION.y + y;
-	pointLight.value.light.position.z = 10 + 40 * getRelativeHeightOnSphere(x, 10);
+	pointLight.value.light.position.x = DEFAULT_LIGHT_POSITION.x + x * 0.3;
+	pointLight.value.light.position.y = DEFAULT_LIGHT_POSITION.y + y * 0.3;
+	// pointLight.value.light.position.z = 10 + 40 * getRelativeHeightOnSphere(x, 10);
 }
 
 function determineCameraTargetPos(positionV3) {
 	const { x, y, z } = positionV3;
-	camera.value.targetPosition.x = -x*0.1;
-	camera.value.targetPosition.y = -y*0.1;
+	camera.value.targetPosition.x = -x*0.03;
+	camera.value.targetPosition.y = -y*0.03;
 }
 
 function getRelativeHeightOnSphere(x, sphereRadius){
@@ -264,26 +325,6 @@ function determineDoorTargetAngle(pointerPos){
 
 }
 
-// animate() {
-// 	const { pointer } = this.renderer.three;
-// 	this.target.copy(myPointer.positionV3);
-// 	this.light.position.copy(this.target);
-
-// 	for (let i = 0; i < this.NUM_INSTANCES; i++) {
-// 	const { position, scale, scaleZ, velocity, attraction, vlimit } = this.instances[i];
-
-// 	this.dummyV.copy(this.target).sub(position).normalize().multiplyScalar(attraction);
-// 	velocity.add(this.dummyV).clampScalar(-vlimit, vlimit);
-// 	position.add(velocity);
-
-// 	this.dummyO.position.copy(position);
-// 	this.dummyO.scale.set(scale, scale, scaleZ);
-// 	this.dummyO.lookAt(this.dummyV.copy(position).add(velocity));
-// 	this.dummyO.updateMatrix();
-// 	this.imesh.setMatrixAt(i, this.dummyO.matrix);
-// 	}
-// 	this.imesh.instanceMatrix.needsUpdate = true;
-// };
 </script>
 
 <style>
