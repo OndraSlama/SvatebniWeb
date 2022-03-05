@@ -15,7 +15,6 @@
 			</Plane>
 
 			<GltfModel src="/models/trees/stromy.gltf" @load="onTreesModelLoadReady" />
-			<!-- <GltfModel src="/models/text/text.gltf" @load="onTextModelLoadReady" /> -->
 
 		</Scene>
 		
@@ -93,7 +92,6 @@ function calculatePhysics(){
 const doorModel = ref();
 const treesModel = ref();
 const signModel = ref();
-// const textModel = ref();
 const rotationPlane = ref();
 
 function onTreesModelLoadReady(model) {
@@ -104,10 +102,6 @@ function onTreesModelLoadReady(model) {
 function onSignModelLoadReady(model) {
 	signModel.value = model;
 	modelFix(model);
-}
-function onTextModelLoadReady(model) {
-	textModel.value = model;
-	modelFix(model, 0.1);
 }
 
 function onDoorModelLoadReady(model) {
@@ -172,11 +166,6 @@ function animate() {
 	} 
 	treesModel.value.position.x = MODELS_X_OFFSET;		
 	signModel.value.position.x = SIGN_X_OFFEST;	
-	// textModel.value.position = TEXT_POSITION;	
-	// textModel.value.position.x = TEXT_POSITION.x;	
-	// textModel.value.position.y = TEXT_POSITION.y;	
-	// textModel.value.position.z = TEXT_POSITION.z;	
-	// textModel.value.rotation.x = -0.4;	
 
 	rotationPlane.value.mesh.rotation.y += (door.value.targetAngle - door.value.currentAngle) * door.value.responsiveFactor;
 	rotationPlane.value.mesh.rotation.y = Math.min(Math.max(rotationPlane.value.mesh.rotation.y, door.value.maxAngle), 0);
