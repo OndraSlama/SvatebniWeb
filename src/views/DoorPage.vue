@@ -1,6 +1,6 @@
 <template>
 	<Renderer ref="rendererC" antialias resize="window" :pointer="{ onMove: onPointerMove, onClick: onPointerClick }" @pointerdown="onPointerDown" @pointerup="onPointerUp">
-		<Camera :position="DEFAULT_CAMERA_POSITION"/>
+		<Camera/>
 		<Scene background="#222222">
 			<PointLight ref="pointLight" :intensity="0.4" :position="DEFAULT_LIGHT_POSITION">
 				<Sphere :radius="0.1" />
@@ -22,7 +22,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from "vue";
+import { ref, onMounted, onUnmounted, watch} from "vue";
+import { useRouter, useRoute } from 'vue-router';
 import {Raycaster, Vector3} from 'three';
 
 // Constants
@@ -48,6 +49,9 @@ const pointLight = ref();
 let simulationTimer = null;
 let elapsedTime = 0;
 
+// Router
+const router = useRouter();
+const route = useRoute();
 
 onMounted(() => {
 	// Start timer
@@ -108,6 +112,21 @@ function onDoorModelLoadReady(model) {
 	console.log("Ready");
 	doorModel.value = model;
 	modelFix(model);
+
+	camera.value.targetPosition = DEFAULT_CAMERA_POSITION	
+	rotationPlane.value.mesh.rotation.y = door.value.openedAngleThreshold * 0.9;
+	door.value.targetAngle = door.value.openedAngleThreshold * 0.9;
+	door.value.responsiveFactor = 0.01;
+
+	setTimeout(() => {
+		camera.value.position = DEFAULT_CAMERA_POSITION
+		door.value.targetAngle = 0;
+	}, 1500);
+
+	setTimeout(() => {
+		door.value.blockInteraction = false
+	}, 3000);
+
 }
 
 function modelFix(model, metalness=0.3){
@@ -134,14 +153,14 @@ const door = ref({
 	openedAngleThreshold: -Math.PI * 0.5,
 	clickedOnDoor: false,
 	isOpened: false,
-	isOpening: false,
+	blockInteraction: true,
 	responsiveFactor: 0
 })
 
 const camera = ref({
-	targetPosition: DEFAULT_CAMERA_POSITION,
+	targetPosition: { x: 0, y: 0, z: 0 },
 	zoomIntegrationFactor: 0,
-	moveFactor: 0.01
+	moveFactor: 0.005
 })
 
 const sign = ref({
@@ -153,17 +172,21 @@ const sign = ref({
 	responsiveFactor: 0.3
 })
 
+function allModelsLoaded(){
+	return doorModel.value && treesModel.value && signModel.value;
+}
+
 function animate() {
 
-	if (!doorModel.value) { 	// If model is not lodaded	
+	if (!allModelsLoaded()) { 	// If model is not lodaded	
 		return;
 	}
 
 	if (door.value.isOpened){
 		door.value.targetAngle = door.value.maxAngle;
 		door.value.responsiveFactor = SLOW_OPEN_SPEED;
+	}
 
-	} 
 	treesModel.value.position.x = MODELS_X_OFFSET;		
 	signModel.value.position.x = SIGN_X_OFFEST;	
 
@@ -174,30 +197,32 @@ function animate() {
 
 	rendererC.value.camera.position.x += (camera.value.targetPosition.x - rendererC.value.camera.position.x) * camera.value.moveFactor;
 	rendererC.value.camera.position.y += (camera.value.targetPosition.y - rendererC.value.camera.position.y) * camera.value.moveFactor;
+	rendererC.value.camera.position.z += (camera.value.targetPosition.z - rendererC.value.camera.position.z) * camera.value.moveFactor;
 
 
-	moveCameraWhenDoorOpens();
-		
+	moveCameraWhenDoorIsOpening();
+
   	door.value.currentAngle=rotationPlane.value.mesh.rotation.y;
 	sign.value.currentAngle=signModel.value.rotation.z;
 }
 
 function openDoor() {
-	door.value.isOpening = true;
+	door.value.blockInteraction = true;
 	door.value.targetAngle=door.value.maxAngle;
 	door.value.responsiveFactor = SLOW_OPEN_SPEED;
 }
 
-function moveCameraWhenDoorOpens() {
+function moveCameraWhenDoorIsOpening() {
   if(door.value.isOpened) {
     rendererC.value.camera.position.z+=camera.value.zoomIntegrationFactor;
-	door.value.isOpening = false;
+	door.value.blockInteraction = false;
     // console.log(rendererC.value.camera.position.z);
   }
 
-  if(rendererC.value.camera.position.z<0) {
-    rendererC.value.camera.position.z=DEFAULT_CAMERA_POSITION.z;
-    rotationPlane.value.mesh.rotation.y=-1.3;
+  if(rendererC.value.camera.position.z<0) {	  	
+	router.push('/home');
+    rendererC.value.camera.position.z=0;
+    rotationPlane.value.mesh.rotation.y=door.value.openedAngleThreshold;
     door.value.targetAngle=0;
     door.value.isOpened=false;
   }
@@ -293,7 +318,7 @@ function getRelativeHeightOnSphere(x, sphereRadius){
 }
 
 function determineDoorTargetAngle(pointerPos){
-	if (!myPointer.value.isDown && !door.value.isOpening){
+	if (!myPointer.value.isDown && !door.value.blockInteraction){
 		door.value.responsiveFactor = MEDIUM_OPEN_SPEED;
 		door.value.targetAngle = intersectsDoor() ? -0.3 : 0;	
 		return;
@@ -302,7 +327,7 @@ function determineDoorTargetAngle(pointerPos){
 
 	if (myPointer.value.stateChanged) {
 		door.value.clickedOnDoor = intersectsDoor();
-	}else if (door.value.clickedOnDoor && !door.value.isOpening) {
+	}else if (door.value.clickedOnDoor && !door.value.blockInteraction) {
 		console.log("opening door")
 		door.value.targetAngle += (pointerPos.x - myPointer.value.lastX) * myPointer.value.moveFactor;
 	}
