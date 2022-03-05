@@ -27,10 +27,10 @@
     "materials" : [
         {
             "doubleSided" : true,
-            "name" : "text_copper.002",
+            "name" : "my_door_steel_2",
             "normalTexture" : {
                 "index" : 0,
-                "scale" : 6.300000190734863
+                "scale" : 10
             },
             "pbrMetallicRoughness" : {
                 "baseColorTexture" : {
@@ -75,18 +75,18 @@
     "images" : [
         {
             "mimeType" : "image/jpeg",
-            "name" : "Metal008_1K_NormalDX",
-            "uri" : "textures/Metal008_1K_NormalDX.jpg"
+            "name" : "Metal029_1K_NormalDX",
+            "uri" : "textures/Metal029_1K_NormalDX.jpg"
         },
         {
             "mimeType" : "image/jpeg",
-            "name" : "Metal008_1K_Color",
-            "uri" : "textures/Metal008_1K_Color.jpg"
+            "name" : "Metal029_1K_Color",
+            "uri" : "textures/Metal029_1K_Color.jpg"
         },
         {
             "mimeType" : "image/png",
-            "name" : "Metal008_1K_Metalness-Metal008_1K_Roughness",
-            "uri" : "textures/Metal008_1K_Metalness-Metal008_1K_Roughness.png"
+            "name" : "Metal029_1K_Metalness-Metal029_1K_Roughness",
+            "uri" : "textures/Metal029_1K_Metalness-Metal029_1K_Roughness.png"
         }
     ],
     "accessors" : [
