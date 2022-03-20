@@ -44,7 +44,7 @@
 			<span> . </span>
 			<br>
 			<span class="w-full">Vzkaz pro snoubence: </span>
-			<textarea v-model="data.message"  placeholder="Např: Chci tatarák a míša řezy. Pivo jedině Bernard." class="form-input w-full sm:w-1/2" />
+			<textarea v-model="data.message"  placeholder="Např: Chci tatarák. Pivo jedině Bernard." class="form-input w-full sm:w-1/2" />
 		</div>
 		<input :disabled="sendingForm || !formIsValid" type="submit" value="Odeslat" class="bg-amber-800 hover:bg-amber-900 text-white font-bold py-2 px-4 rounded-md disabled:bg-amber-800/30" />
 		<p v-if="!formIsValid && !formSent" class="text-xs mt-2  text-red-400">Vyplň všechna povinná pole.</p>
