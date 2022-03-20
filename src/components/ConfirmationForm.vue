@@ -1,8 +1,8 @@
 <template>
 	<v-form @submit.prevent="sendForm" class="">
 		<v-sheet class="tw-flex tw-flex-wrap tw-items-center" id="formSheet">
-			<div class=" tw-border-2" >Tímto potvrzuji, že přijdu já </div>
-			<v-text-field v-model="data.name" label="Jméno a příjmení" class="tw-min-w-[150px]"/>
+			<div class=" tw-border-2" >Tímto potvrzuji, že přijdu </div>
+			<v-text-field v-model="data.name" label="já" placeholder="Jméno a příjmení" class="tw-min-w-[150px]"/>
 			<div class="border"> s </div>
 			<v-text-field v-model="data.totalNumber" type="number" label="počet" class="tw-min-w-[50px]"/>
 			<div> {{ isAlone ? "žádnou" : "" }} další{{ isPlural ? "mi" : "" }} </div>
@@ -11,8 +11,7 @@
 			<v-text-field v-if="!isAlone" v-model="data.childNumber" type="number" label="počet" class="tw-min-w-[50px]" />
 			<div  v-if="!isAlone"> {{ !data.childNumber ? "žádné ne" : "" }}bud{{ data.childNumber > 1 ? "ou děti" : "e dítě" }}. </div>
 			<div class=""></div>
-			<div> Přijed{{ isAlone ? "u" : "eme" }} </div>
-			<v-select v-model="data.arrival" class=""  item-text="text" item-value="value" :items="[
+			<v-select v-model="data.arrival" class="" :label="isAlone ? 'Přijedu' : 'Přijedeme'" item-text="text" item-value="value" :items="[
 				'na sraz do Horního Smrčného',
 				'až na obřad na Chlumě'
 			]">
