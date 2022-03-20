@@ -1,13 +1,17 @@
 <template>
-<div class="container mx-auto border-2">
-	<h1 class="">H&O</h1>
-	<p>27.8.2022</p>
-	<ConfirmationForm class="border-2 max-w-4xl m-auto border-cyan-500"></ConfirmationForm>
+<v-app>
+	<v-main>
+		<HeaderSection></HeaderSection>
+		<v-container>
+			<ConfirmationForm></ConfirmationForm>			
+		</v-container>		
+	</v-main>
+</v-app>
 
-</div>
 </template>
 
 <script setup>
 import ConfirmationForm from './../components/ConfirmationForm.vue'
+import HeaderSection from './../components/HeaderSection.vue'
 	
 </script>
