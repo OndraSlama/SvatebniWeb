@@ -1,49 +1,50 @@
 <template>
 	<v-form @submit.prevent="sendForm" class="">
-		<v-sheet class="d-flex flex-wrap border ">
-			<div class="border" >Tímto potvrzuji, že přijdu já </div>
-			<v-text-field v-model="data.name" variant="outlined" label="Jméno a příjmení" class=""/>
+		<v-sheet class="tw-flex tw-flex-wrap tw-items-center" id="formSheet">
+			<div class=" tw-border-2" >Tímto potvrzuji, že přijdu já </div>
+			<v-text-field v-model="data.name" label="Jméno a příjmení" class="tw-min-w-[150px]"/>
 			<div class="border"> s </div>
-			<v-text-field v-model="data.totalNumber" variant="outlined" type="number" label="počet" class="" />
-			<span> {{ isAlone ? "žádnou" : "" }} další{{ isPlural ? "mi" : "" }} </span>
-			<span> {{ isPlural ? "lidmi" : "osobou" }}.</span>	
-			<span v-if="!isAlone"> Z toho </span>
-			<input v-if="!isAlone" v-model="data.childNumber" type="number" placeholder="počet" class="" />
-			<span  v-if="!isAlone"> {{ !data.childNumber ? "žádné ne" : "" }}bud{{ data.childNumber > 1 ? "ou děti" : "e dítě" }}. </span>
-			<span class=""></span>
-			<span> Přijed{{ isAlone ? "u" : "eme" }} </span>
-			<select v-model="data.arrival" class="">
-				<option value="sraz">na sraz do Horního Smrčného</option>
-				<option value="obrad">až na obřad na Chlumě</option>
-			</select>
-			<span v-if="data.arrival != 'sraz'">.</span> 
-			<span v-if="data.arrival == 'sraz'"> odkud </span>
+			<v-text-field v-model="data.totalNumber" type="number" label="počet" class="tw-min-w-[50px]"/>
+			<div> {{ isAlone ? "žádnou" : "" }} další{{ isPlural ? "mi" : "" }} </div>
+			<div> {{ isPlural ? "lidmi" : "osobou" }}.</div>	
+			<div v-if="!isAlone"> Z toho </div>
+			<v-text-field v-if="!isAlone" v-model="data.childNumber" type="number" label="počet" class="tw-min-w-[50px]" />
+			<div  v-if="!isAlone"> {{ !data.childNumber ? "žádné ne" : "" }}bud{{ data.childNumber > 1 ? "ou děti" : "e dítě" }}. </div>
+			<div class=""></div>
+			<div> Přijed{{ isAlone ? "u" : "eme" }} </div>
+			<v-select v-model="data.arrival" class=""  item-text="text" item-value="value" :items="[
+				'na sraz do Horního Smrčného',
+				'až na obřad na Chlumě'
+			]">
+			</v-select>
+			<div v-if="data.arrival != 'sraz'">.</div> 
+			<div v-if="data.arrival == 'sraz'"> odkud </div>
 			<select v-if="data.arrival == 'sraz'" v-model="data.transportSraz" class="">
 				<option value="alone">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
 				<option value="arrange">využij{{ isAlone ? "i" : "eme" }} odvoz</option>
 			</select>
-			<span v-if="data.arrival == 'sraz'"> na obřad na Chlum. </span>
-			<span class=""></span>
-			<span> Z Chlumu </span>
+			<div v-if="data.arrival == 'sraz'"> na obřad na Chlum. </div>
+			<div class=""></div>
+			<div> Z Chlumu </div>
 
 			<select v-model="data.transportObrad" class="">
 				<option value="alone">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
 				<option value="arrange">využij{{ isAlone ? "i" : "eme" }} odvoz</option>
 			</select>
 
-			<span> na hostinu v Okřížkách. </span>
-			<span class=""></span>
-			<span> Přespání </span>
+			<div> na hostinu v Okřížkách. </div>
+			<div class=""></div>
+			<div> Přespání </div>
 			<select v-model="data.sleeping" class="">
 				<option value="alone"> zařídit nepotřebuj{{isAlone ? "i":"eme"}}</option>
 				<option value="arrange">{{isAlone ? "bych potřeboval":"bychom potřebovali"}} zařídit</option>
 			</select>
-			<span v-if="data.sleeping == 'arrange'"> . </span>
-			<span v-if="data.sleeping == 'arrange'">  Proto přidávám kontakt: </span>
+			<div v-if="data.sleeping == 'arrange'"> . </div>
+			<div v-if="data.sleeping == 'arrange'">  Proto přidávám kontakt: </div>
 			<input  v-if="data.sleeping == 'arrange'" v-model="data.contact" type="text" placeholder="tel. číslo nebo email" class="" />
-			<span> . </span>
+			<div> . </div>
 			<br>
-			<span class="">Vzkaz pro snoubence: </span>
+			<div class="">Vzkaz pro snoubence: </div>
 			<textarea v-model="data.message"  placeholder="Např: Chci tatarák. Pivo jedině Bernard." class="" />
 		</v-sheet>
 		<input :disabled="sendingForm || !formIsValid" type="submit" value="Odeslat" class="" />
@@ -160,6 +161,10 @@ function onlyNumber($event) {
 </script>
 
 <style>
+
+#formSheet div {
+	@apply tw-max-h-14 tw-mr-2 tw-mb-2
+}
 
 /* .form-inner-line {
 	@apply flex place-items-center gap-2;
