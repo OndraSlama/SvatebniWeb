@@ -1,5 +1,5 @@
 <template>
-<v-app>
+<v-app class="tw-bg-[url('/images/bg.jpg')] tw-bg-opacity-10">
 	<v-main>
 		<HeaderSection></HeaderSection>
 		<v-container>

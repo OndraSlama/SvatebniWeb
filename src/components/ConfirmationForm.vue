@@ -1,6 +1,7 @@
 <template>
-	<form @submit.prevent="sendForm" class="tw-w-full tw-text-center tw-p-6">
+	<form @submit.prevent="sendForm" class="tw-w-full tw-text-center ">
 		<div class="form-line tw-text-center tw-justify-center tw-mb-3 tw-text-lg">
+			
 			<span>Tímto potvrzuji, že přijdu já </span>
 			<input v-model="data.name" type="text" placeholder="Jméno a příjmení" class="form-input tw-w-40" />
 			<span> s </span>
@@ -46,7 +47,7 @@
 			<span> . </span>
 			<br>
 			<span class="tw-w-full">Vzkaz pro snoubence: </span>
-			<textarea v-model="data.message"  placeholder="Např: Chci tatarák. Pivo jedině Bernard." class="form-input tw-w-full sm:tw-w-1/2" />
+			<textarea v-model="data.message"  placeholder="Např: Chci tatarák. Pivo jedině Bernard." class="form-input tw-max-w-[400px] tw-w-full" />
 		</div>
 		<input :disabled="sendingForm || !formIsValid" type="submit" value="Odeslat" class="tw-bg-amber-800 hover:tw-bg-amber-900 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded-md disabled:tw-bg-amber-800/30" />
 		<p v-if="!formIsValid && !formSent" class="tw-text-xs mt-2  tw-text-red-400">Vyplň všechna povinná pole.</p>
