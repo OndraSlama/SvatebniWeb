@@ -5,7 +5,7 @@
 			<input v-model="data.name" type="text" placeholder="Jméno a příjmení" class="form-input tw-w-40" />
 			<span> s </span>
 			<input v-model="data.totalNumber" type="number" placeholder="počet" class="form-input tw-w-16" />
-			<span> {{ isAlone ? "žádnou" : "" }} další{{ isPlural ? "mi" : "" }} </span>
+			<span> {{ isAlone ? "(žádnou)" : "" }} další{{ isPlural ? "mi" : "" }} </span>
 			<span> {{ isPlural ? "lidmi" : "osobou" }}.</span>	
 			<span v-if="!isAlone"> Z toho </span>
 			<input v-if="!isAlone" v-model="data.childNumber" type="number" placeholder="počet" class="form-input tw-w-16" />
