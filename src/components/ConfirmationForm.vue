@@ -1,54 +1,56 @@
 <template>
-	<v-form @submit.prevent="sendForm" class="">
-		<v-sheet class="tw-flex tw-flex-wrap tw-items-center" id="formSheet">
-			<div class=" tw-border-2" >Tímto potvrzuji, že přijdu </div>
-			<v-text-field v-model="data.name" label="já" placeholder="Jméno a příjmení" class="tw-min-w-[150px]"/>
-			<div class="border"> s </div>
-			<v-text-field v-model="data.totalNumber" type="number" label="počet" class="tw-min-w-[50px]"/>
-			<div> {{ isAlone ? "žádnou" : "" }} další{{ isPlural ? "mi" : "" }} </div>
-			<div> {{ isPlural ? "lidmi" : "osobou" }}.</div>	
-			<div v-if="!isAlone"> Z toho </div>
-			<v-text-field v-if="!isAlone" v-model="data.childNumber" type="number" label="počet" class="tw-min-w-[50px]" />
-			<div  v-if="!isAlone"> {{ !data.childNumber ? "žádné ne" : "" }}bud{{ data.childNumber > 1 ? "ou děti" : "e dítě" }}. </div>
-			<div class=""></div>
-			<v-select v-model="data.arrival" class="" :label="isAlone ? 'Přijedu' : 'Přijedeme'" item-text="text" item-value="value" :items="[
-				'na sraz do Horního Smrčného',
-				'až na obřad na Chlumě'
-			]">
-			</v-select>
-			<div v-if="data.arrival != 'sraz'">.</div> 
-			<div v-if="data.arrival == 'sraz'"> odkud </div>
-			<select v-if="data.arrival == 'sraz'" v-model="data.transportSraz" class="">
+	<form @submit.prevent="sendForm" class="tw-w-full tw-text-center tw-p-6">
+		<div class="form-line tw-text-center tw-justify-center tw-mb-3 tw-text-lg">
+			<span>Tímto potvrzuji, že přijdu já </span>
+			<input v-model="data.name" type="text" placeholder="Jméno a příjmení" class="form-input tw-w-40" />
+			<span> s </span>
+			<input v-model="data.totalNumber" type="number" placeholder="počet" class="form-input tw-w-16" />
+			<span> {{ isAlone ? "žádnou" : "" }} další{{ isPlural ? "mi" : "" }} </span>
+			<span> {{ isPlural ? "lidmi" : "osobou" }}.</span>	
+			<span v-if="!isAlone"> Z toho </span>
+			<input v-if="!isAlone" v-model="data.childNumber" type="number" placeholder="počet" class="form-input tw-w-16" />
+			<span  v-if="!isAlone"> {{ !data.childNumber ? "žádné ne" : "" }}bud{{ data.childNumber > 1 ? "ou děti" : "e dítě" }}. </span>
+			<span class="tw-basis-full tw-h-0"></span>
+			<span> Přijed{{ isAlone ? "u" : "eme" }} </span>
+			<span>
+				<select v-model="data.arrival" class="form-input">
+					<option value="sraz">na sraz do Horního Smrčného</option>
+					<option value="obrad">až na obřad na Chlumě</option>
+				</select>
+				<span v-if="data.arrival != 'sraz'">.</span> 
+			</span>
+			<span v-if="data.arrival == 'sraz'"> odkud </span>
+			<select v-if="data.arrival == 'sraz'" v-model="data.transportSraz" class="form-input">
 				<option value="alone">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
 				<option value="arrange">využij{{ isAlone ? "i" : "eme" }} odvoz</option>
 			</select>
-			<div v-if="data.arrival == 'sraz'"> na obřad na Chlum. </div>
-			<div class=""></div>
-			<div> Z Chlumu </div>
+			<span v-if="data.arrival == 'sraz'"> na obřad na Chlum. </span>
+			<span class="tw-basis-full tw-h-0"></span>
+			<span> Z Chlumu </span>
 
-			<select v-model="data.transportObrad" class="">
+			<select v-model="data.transportObrad" class="form-input">
 				<option value="alone">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
 				<option value="arrange">využij{{ isAlone ? "i" : "eme" }} odvoz</option>
 			</select>
 
-			<div> na hostinu v Okřížkách. </div>
-			<div class=""></div>
-			<div> Přespání </div>
-			<select v-model="data.sleeping" class="">
+			<span> na hostinu v Okřížkách. </span>
+			<span class="basis-full tw-h-0"></span>
+			<span> Přespání </span>
+			<select v-model="data.sleeping" class="form-input">
 				<option value="alone"> zařídit nepotřebuj{{isAlone ? "i":"eme"}}</option>
 				<option value="arrange">{{isAlone ? "bych potřeboval":"bychom potřebovali"}} zařídit</option>
 			</select>
-			<div v-if="data.sleeping == 'arrange'"> . </div>
-			<div v-if="data.sleeping == 'arrange'">  Proto přidávám kontakt: </div>
-			<input  v-if="data.sleeping == 'arrange'" v-model="data.contact" type="text" placeholder="tel. číslo nebo email" class="" />
-			<div> . </div>
+			<span v-if="data.sleeping == 'arrange'"> . </span>
+			<span v-if="data.sleeping == 'arrange'">  Proto přidávám kontakt: </span>
+			<input  v-if="data.sleeping == 'arrange'" v-model="data.contact" type="text" placeholder="tel. číslo nebo email" class="form-input" />
+			<span> . </span>
 			<br>
-			<div class="">Vzkaz pro snoubence: </div>
-			<textarea v-model="data.message"  placeholder="Např: Chci tatarák. Pivo jedině Bernard." class="" />
-		</v-sheet>
-		<input :disabled="sendingForm || !formIsValid" type="submit" value="Odeslat" class="" />
-		<p v-if="!formIsValid && !formSent" class="">Vyplň všechna povinná pole.</p>
-	</v-form>
+			<span class="tw-w-full">Vzkaz pro snoubence: </span>
+			<textarea v-model="data.message"  placeholder="Např: Chci tatarák. Pivo jedině Bernard." class="form-input tw-w-full sm:tw-w-1/2" />
+		</div>
+		<input :disabled="sendingForm || !formIsValid" type="submit" value="Odeslat" class="tw-bg-amber-800 hover:tw-bg-amber-900 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded-md disabled:tw-bg-amber-800/30" />
+		<p v-if="!formIsValid && !formSent" class="tw-text-xs mt-2  tw-text-red-400">Vyplň všechna povinná pole.</p>
+	</form>
 </template>
 
 <script setup>
@@ -160,20 +162,15 @@ function onlyNumber($event) {
 </script>
 
 <style>
-
-#formSheet div {
-	@apply tw-max-h-14 tw-mr-2 tw-mb-2
-}
-
-/* .form-inner-line {
-	@apply flex place-items-center gap-2;
+.form-inner-line {
+	@apply tw-flex tw-place-items-center tw-gap-2;
 }
 .form-line {
-	@apply flex place-items-center gap-2 py-2 flex-wrap;
+	@apply tw-flex tw-place-items-center tw-gap-2 tw-py-2 tw-flex-wrap;
 }
 
-. {
-	@apply border-2 border-amber-700 border-opacity-40 rounded-md focus:border-red-700 px-2;
+.form-input {
+	@apply tw-bg-black tw-bg-opacity-10 tw-rounded-md tw-px-2;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -183,7 +180,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 input[type="number"] {
     -moz-appearance: textfield;
-} */
+}
 
 
 </style>
