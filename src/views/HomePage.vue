@@ -1,17 +1,25 @@
 <template>
-<v-app class="tw-bg-[url('/images/bg.jpg')] tw-bg-opacity-10">
-	<v-main>
-		<HeaderSection></HeaderSection>
-		<v-container>
-			<ConfirmationForm></ConfirmationForm>			
-		</v-container>		
-	</v-main>
-</v-app>
-
+	<v-app>
+		<v-main>
+			<HeaderSection></HeaderSection>
+			<div class="tw-pb-10">
+				
+				<Map></Map>
+				
+				<!-- <v-container> -->
+				<ConfirmationForm class="tw-max-w-5xl tw-py-8 tw-px-5  tw-m-auto"></ConfirmationForm>
+				<!-- </v-container> -->
+			</div>
+		</v-main>
+	</v-app>
 </template>
 
 <script setup>
-import ConfirmationForm from './../components/ConfirmationForm.vue'
-import HeaderSection from './../components/HeaderSection.vue'
-	
+import ConfirmationForm from "./../components/ConfirmationForm.vue";
+import HeaderSection from "./../components/HeaderSection.vue";
+import Map from "./../components/Map.vue";
+import {ref} from "vue";
+
+
+// let mapSvg = require('./../assets/map/mapa_vsechno.svg')
 </script>

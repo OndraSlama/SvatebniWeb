@@ -1,7 +1,7 @@
 <template>
 	<v-parallax scale="1.5" src="/public/images/hero_image.jpg" class="tw-flex align-center tw-max-h-screen tw-min-h-screen">
-			<div class="tw-text-center tw-font-[hobbiton]">
-				<div class="tw-mb-10 tw-text-8xl md:tw-text-9xl tw-flex lg:tw-gap-8 tw-justify-center tw-flex-col lg:tw-flex-row">
+			<div class="tw-text-center tw-font-[hobbiton] tw-pt-10 tw-pb-6 tw-backdrop-blur-sm tw-bg-white/30">
+				<div class="tw-mb-10 tw-text-8xl md:tw-text-9xl tw-flex lg:tw-gap-8 tw-justify-center tw-flex-col lg:tw-flex-row ">
 					<div>Hana</div>
 					<div>&</div>
 					<div>Ondra</div>
