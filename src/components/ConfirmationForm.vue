@@ -1,6 +1,7 @@
 <template>
-	<form @submit.prevent="sendForm" class="tw-w-full tw-text-center">
-		<div class="form-line tw-text-center tw-justify-center tw-mb-3 tw-text-lg">
+	<form @submit.prevent="sendForm" class="tw-w-full tw-text-center tw-font-[inkfree] tw-text-xl">
+		<Title>Potvrzeni</Title>
+		<div class="form-line tw-text-center tw-justify-center tw-mb-3 ">
 			<span>Tímto potvrzuji, že přijdu já </span>
 			<input v-model="data.name" type="text" placeholder="Jméno a příjmení" class="form-input tw-w-40" />
 			<span> s </span>
@@ -34,7 +35,7 @@
 			</select>
 
 			<span> na hostinu v Okřížkách. </span>
-			<span class="basis-full tw-h-0"></span>
+			<span class="tw-basis-full"></span>
 			<span> Přespání </span>
 			<span>
 				<select v-model="data.sleeping" class="form-input">
@@ -49,7 +50,7 @@
 				<span>. </span>
 			</span>
 			<br />
-			<span class="tw-w-full">Vzkaz pro snoubence: </span>
+			<span class="tw-w-full tw-mt-5">Vzkaz pro snoubence: </span>
 			<textarea v-model="data.message" placeholder="Např: Chci tatarák. Pivo jedině Bernard." class="form-input tw-max-w-[400px] tw-w-full" />
 		</div>
 		<input :disabled="sendingForm || !formIsValid" type="submit" value="Odeslat" class="tw-bg-amber-800 hover:tw-bg-amber-900 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded-md disabled:tw-bg-amber-800/30" />
@@ -59,6 +60,7 @@
 
 <script setup>
 import { ref, watch, computed } from "vue";
+import Title from "././../components/Title.vue";
 
 const data = ref();
 function initializeForm() {
@@ -171,7 +173,7 @@ function onlyNumber($event) {
 	@apply tw-flex tw-place-items-center tw-gap-2;
 }
 .form-line {
-	@apply tw-flex tw-place-items-center tw-gap-2 tw-py-2 tw-flex-wrap;
+	@apply tw-flex tw-place-items-center tw-gap-3 tw-py-2 tw-flex-wrap;
 }
 
 .form-input {

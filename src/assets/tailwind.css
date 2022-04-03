@@ -13,3 +13,12 @@
 	src: url("/fonts/Hobbiton/hobbiton-regular.woff") format("woff"), url("/fonts/Hobbiton/hobbiton-regular.ttf") format("ttf");
   }
 
+@font-face {
+	font-family: "InkFree";
+	font-weight: 400;
+	font-style: normal;
+	font-display: auto;
+	unicode-range: U+000-5FF;
+	src: url("/fonts/Hobbiton/ink-regular.woff") format("woff");
+  }
+
