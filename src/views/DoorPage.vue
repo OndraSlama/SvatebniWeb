@@ -24,12 +24,10 @@
 <script setup>
 import { ref, onMounted, onUnmounted, watch} from "vue";
 import { useRouter, useRoute } from 'vue-router';
-import {Raycaster, Vector3} from 'three';
 
 // Constants
 const DEFAULT_CAMERA_POSITION = { x: 0, y: 0, z: 20 };
 const DEFAULT_LIGHT_POSITION = { x: -5, y: 3, z: 20 };
-const TEXT_POSITION = { x: -4.5, y: -4, z: 3 };
 const MODELS_X_OFFSET = -2.83;
 const SIGN_X_OFFEST = 4.15;
 const SLOW_OPEN_SPEED = 0.01;
@@ -37,7 +35,6 @@ const MEDIUM_OPEN_SPEED = 0.05;
 const FAST_OPEN_SPEED = 0.1;
 
 const TIMER_PERIOD = 20; // milliseconds 
-const SWING_PERIOD = 3000; // milliseconds
 const SIGN_ANGLE_FIX_FACTOR = 4.34;
 const SIGN_INITIAL_ANGLE = -Math.PI *0.1 * SIGN_ANGLE_FIX_FACTOR;
 
@@ -256,11 +253,6 @@ const myPointer = ref({
 	stateChanged: false,
 	moveFactor: 0.35
 })
-// watch(() => myPointer.value.isDown, (state) => {
-// 	console.log(state);
-// });
-
-
 
 function onPointerMove(pointer) {
 	const { positionV3 } = pointer;
