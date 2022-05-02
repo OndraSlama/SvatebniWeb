@@ -1,5 +1,5 @@
 <template>
-	<form @submit.prevent="sendForm" class="tw-w-full tw-text-center tw-font-[inkfree] tw-text-xl">
+	<form @submit.prevent="sendForm">
 		<Title>Potvrzeni</Title>
 		<div class="form-line tw-text-center tw-justify-center tw-mb-3 ">
 			<span>Tímto potvrzuji, že přijdu já </span>
@@ -145,7 +145,7 @@ function sendForm() {
 			if (result == "Error") {
 				alert("Omlouváme se, ale něco se pokazilo. Potvrzení účasti se nedalo zpracovat. Zkontroluj data a zkus to prosím znovu.");
 			} else {
-				alert("Děkuji za odeslání formuláře. Potvrzení účasti úspěšně odesláno.");
+				alert("Děkuji za odeslání formuláře. Potvrzení účasti přijato.");
 				formSent.value = true;
 				initializeForm();
 			}
