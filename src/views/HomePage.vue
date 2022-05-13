@@ -11,6 +11,13 @@
 					<div class="px-4">
 						Vezměte toto oznámení jako malou radu, že svatba není o trápení, co dát ke svatebnímu daru. Pokud něčím přispějete, budeme za to rádi, mnohem důležitější však pro nás bude, že strávíte tento den s námi.			
 					</div>
+					<Title>Q&A</Title>
+					<div class="px-4">
+						<div class="tw-text-3xl tw-mb-4"><b>Jak se můžu dopravit na sraz k nevěstě do Horního Smrčného?</b></div>			
+						<div>Na sraz se každý dopraví vlastní cestou. Na parkování bude místa dost. Můžete dojet i vlakem z Třebíče do Přímělkova odkud už jsme schopní po předchozí domluvě zařídit dovoz.</div>			
+						<div class="tw-text-3xl tw-mb-4 tw-mt-10"><b>Můžu nechat auto v Horním Smrčném a využít odtud autobus?</b></div>			
+						<div>Určite! S tím se tak nějak počítá. Pro auto vás pak buď již večer zaveze svatební řidič, nebo si ho vyzvednete následující den.</div>			
+					</div>
 					<ConfirmationForm class="tw-max-w-5xl tw-py-8 tw-px-5  tw-m-auto"></ConfirmationForm>
 				</div>
 				
