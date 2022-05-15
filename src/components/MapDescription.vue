@@ -1,5 +1,5 @@
 <template>
-	<div @mouseenter="expanded = true" @mouseleave="expanded = false" :class="classes">
+	<div @mouseenter="set_expanded" @mouseleave="unset_expanded" :class="classes">
 		<slot :expanded="expanded"></slot>
 		<!-- <div v-if="expandable && !expanded" class="tw-text-center tw-text-4xl tw-bg">...</div> -->
 	</div>
@@ -21,6 +21,7 @@ const classes = computed(() => [
 		"tw-overflow-clip",
 		"tw-ease-in-out",
 		"tw-shadow-md",
+		"tw-rounded-lg",
 		"hover:tw-shadow-xl",
 		"hover:tw--translate-y-1",
 		"hover:tw-z-50",
@@ -33,9 +34,18 @@ const classes = computed(() => [
 		"tw-backdrop-blur-sm",
 		"tw-bg-white/30",
 		"hover:tw-bg-white/70",
-		"tw-text-lg",
-		"tw-font-[InkFree]"
+		"tw-text-lg"		
 		]);
+
+const unset_expanded = () => {
+	setTimeout(() => {
+		expanded.value = false;
+	}, 120);
+}
+
+const set_expanded = () => {
+	expanded.value = true;
+}
 </script>
 
 <style>

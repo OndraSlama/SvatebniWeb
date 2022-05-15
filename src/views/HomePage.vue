@@ -13,12 +13,14 @@
 					</div>
 					<Title>Q&A</Title>
 					<div class="px-4">
-						<div class="tw-text-3xl tw-mb-4"><b>Jak se můžu dopravit na sraz k nevěstě do Horního Smrčného?</b></div>			
+						<div class="tw-text-3xl tw-mb-4"><b>Jak se můžeme dopravit na sraz k nevěstě do Horního Smrčného?</b></div>			
 						<div>Na sraz se každý dopraví vlastní cestou. Na parkování bude místa dost. Můžete dojet i vlakem <a class="tw-underline tw-text-blue-500" href="https://idos.idnes.cz/vlakyautobusymhdvse/spojeni/prehled/?p=Fyb5SSWpsOpfNdTbad2ENK5UbPC5ckqikZtrmBdMqBI1GDvK1bglAtBH7vVJYPx72YFcRMS6PfNli5xjWUTM1w--">z Třebíče do Přímělkova</a> odkud už jsme schopní po předchozí domluvě zařídit dovoz.</div>			
-						<div class="tw-text-3xl tw-mb-4 tw-mt-10"><b>Můžu nechat auto v Horním Smrčném a využít odtud autobus?</b></div>			
-						<div>Určite! S tím se tak nějak počítá. Auto si pak vyzvednete následující den. Ideálně ale auto vůbec neberte a dojeďte vlakem 😊 (viz odpověď výše).</div>			
+						<div class="tw-text-3xl tw-mb-4 tw-mt-10"><b>Můžeme nechat auto v Horním Smrčném a využít odtud autobus?</b></div>			
+						<div>Určite! S tím se tak nějak počítá. Auto si pak vyzvednete následující den. Ideálně ale auto vůbec neberte a dojeďte vlakem z Třebíče 😊 (viz odpověď výše).</div>			
+						<div class="tw-text-3xl tw-mb-4 tw-mt-10"><b>Platí nějaký dress code?</b></div>			
+						<div>Na ničem nelpíme. Přijď v tom, v čem se budeš cítit nejlépe Ty.</div>			
 					</div>
-					<ConfirmationForm class="tw-max-w-5xl tw-py-8 tw-px-5  tw-m-auto"></ConfirmationForm>
+					<ConfirmationForm id="potvrzeni" class="tw-max-w-5xl tw-py-8 tw-px-5  tw-m-auto"></ConfirmationForm>
 				</div>
 				
 				<!-- <v-container> -->

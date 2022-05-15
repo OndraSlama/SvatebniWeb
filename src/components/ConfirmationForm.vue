@@ -177,7 +177,7 @@ function onlyNumber($event) {
 }
 
 .form-input {
-	@apply tw-bg-black tw-bg-opacity-10 tw-px-3;
+	@apply tw-bg-black tw-bg-opacity-10 tw-px-3 tw-rounded-lg;
 }
 
 input[type="number"]::-webkit-outer-spin-button,

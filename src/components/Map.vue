@@ -1,10 +1,9 @@
 <template>
 		
 		<Title>Svatebni den</Title>
-		<!-- <div class="tw-text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut aperiam debitis dolorum distinctio corporis quisquam assumenda ducimus sapiente illo.</div> -->
-
+		<!-- <div class="tw-text-center tw-text-2xl tw-mt-[-50px]"> Najetím na sekce zobrazíš další info.</div> -->
 		<div class="tw-flex tw-flex-col lg:tw-flex-row tw-gap-3 tw-relative tw-justify-center tw-items-center tw-pb-16 lg:tw-pt-10 tw-px-4">
-			<MapDescription v-slot="{expanded}" class="lg:tw-mb-[750px] lg:tw-ml-[-500px] xl:tw-ml-[-680px]"> 
+			<MapDescription v-slot="{expanded}" class="lg:tw-mb-[780px] lg:tw-ml-[-500px] xl:tw-ml-[-680px]"> 
 
 				<div class="tw-text-3xl xl:tw-text-4xl">Sraz v Horním smrčném</div>
 				<ul>
@@ -83,7 +82,7 @@ Aby vzpomínky na tento den zůstaly uchovány nejen v našich pamětích, bude 
 			</MapDescription>
 
 
-			<div class="tw-flex tw-justify-center">
+			<div class="tw-flex tw-justify-center tw-mt-14 lg:tw-mt-0">
 				<img class="max-w-[300px] tw-hidden lg:tw-block" src="./../assets/map/mapa.svg" />
 				<img class="max-w-[300px] lg:tw-hidden" src="./../assets/map/mapa_mobil.svg" />
 			</div>
