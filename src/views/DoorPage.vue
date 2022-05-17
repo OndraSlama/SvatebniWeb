@@ -33,6 +33,7 @@ const SIGN_X_OFFEST = 4.15;
 const SLOW_OPEN_SPEED = 0.01;
 const MEDIUM_OPEN_SPEED = 0.05;
 const FAST_OPEN_SPEED = 0.1;
+const AUTOOPEN_TIME = 1000 * 60 * 5; // 5 minutes
 
 const TIMER_PERIOD = 20; // milliseconds 
 const SIGN_ANGLE_FIX_FACTOR = 4.34;
@@ -62,13 +63,20 @@ onMounted(() => {
 	renderer.onBeforeRender(() => {		
 		animate();
 	});
+
+	addEventListener('wheel', handleScroll);
 });
 
 onUnmounted(() => {
 	// Stop timer
 	clearInterval(simulationTimer);
 	clearInterval(cameraTimer);
+	addEventListener('wheel', handleScroll);
 })
+
+function handleScroll(event) {
+	door.value.targetAngle -= event.deltaY * 0.002;
+}
 
 const dampeningPerCycle = Math.pow(0.6, TIMER_PERIOD / 1000);
 function calculatePhysics(){
@@ -83,7 +91,6 @@ function calculatePhysics(){
 	door.value.prevAngle = door.value.currentAngle;
 
 	sign.value.angleAccel += 200* Math.abs(door.value.angleSpeed) * ( TIMER_PERIOD / 1000)
-	// console.log(sign.value.targetAngle);	
 	
 	sign.value.angleSpeed += sign.value.angleAccel*(TIMER_PERIOD/1000);
 	sign.value.angleSpeed *= dampeningPerCycle;
@@ -110,18 +117,19 @@ function onDoorModelLoadReady(model) {
 	doorModel.value = model;
 	modelFix(model);
 
-	camera.value.targetPosition = DEFAULT_CAMERA_POSITION	
+	camera.value.targetPosition = {...DEFAULT_CAMERA_POSITION}	
 	rotationPlane.value.mesh.rotation.y = door.value.openedAngleThreshold * 0.9;
 	door.value.targetAngle = door.value.openedAngleThreshold * 0.9;
-	door.value.responsiveFactor = 0.01;
+	door.value.responsiveFactor = SLOW_OPEN_SPEED;
 
 	setTimeout(() => {
-		camera.value.position = DEFAULT_CAMERA_POSITION
+		camera.value.position = {...DEFAULT_CAMERA_POSITION}
 		door.value.targetAngle = 0;
 	}, 1500);
 
 	setTimeout(() => {
 		door.value.blockInteraction = false
+		door.value.responsiveFactor = FAST_OPEN_SPEED;
 	}, 3000);
 
 }
@@ -151,7 +159,7 @@ const door = ref({
 	clickedOnDoor: false,
 	isOpened: false,
 	blockInteraction: true,
-	responsiveFactor: 0
+	responsiveFactor: FAST_OPEN_SPEED
 })
 
 const camera = ref({
@@ -179,6 +187,10 @@ function animate() {
 		return;
 	}
 
+	if (elapsedTime > AUTOOPEN_TIME){
+		openDoor();
+	}
+
 	if (door.value.isOpened){
 		door.value.targetAngle = door.value.maxAngle;
 		door.value.responsiveFactor = SLOW_OPEN_SPEED;
@@ -190,7 +202,11 @@ function animate() {
 	rotationPlane.value.mesh.rotation.y += (door.value.targetAngle - door.value.currentAngle) * door.value.responsiveFactor;
 	rotationPlane.value.mesh.rotation.y = Math.min(Math.max(rotationPlane.value.mesh.rotation.y, door.value.maxAngle), 0);
 
-	signModel.value.rotation.z = (sign.value.targetAngle - sign.value.currentAngle) * sign.value.responsiveFactor;
+	signModel.value.rotation.z = (sign.value.targetAngle - sign.value.currentAngle) * sign.value.responsiveFactor;	
+
+	if (!door.value.blockInteraction){
+		camera.value.targetPosition.z = DEFAULT_CAMERA_POSITION.z - Math.abs(door.value.currentAngle*5);
+	}
 
 	rendererC.value.camera.position.x += (camera.value.targetPosition.x - rendererC.value.camera.position.x) * camera.value.moveFactor;
 	rendererC.value.camera.position.y += (camera.value.targetPosition.y - rendererC.value.camera.position.y) * camera.value.moveFactor;
@@ -213,7 +229,6 @@ function moveCameraWhenDoorIsOpening() {
   if(door.value.isOpened) {
     rendererC.value.camera.position.z+=camera.value.zoomIntegrationFactor;
 	door.value.blockInteraction = false;
-    // console.log(rendererC.value.camera.position.z);
   }
 
   if(rendererC.value.camera.position.z<0) {	  	
@@ -227,7 +242,6 @@ function moveCameraWhenDoorIsOpening() {
 
 watch( () => door.value.currentAngle, (newValue) => {
 	if (newValue < door.value.openedAngleThreshold) {
-		// console.log("Door open: ", newValue);
 		door.value.isOpened = true;		
 	}
 });
@@ -273,8 +287,6 @@ function onPointerDown() {
 function onPointerUp() {
 	myPointer.value.isDown = false;
 	door.value.clickedOnDoor = false;	
-	// door.value.targetAngle = 0;
-	// door.value.responsiveFactor = 0.02;
 	console.log("pointer up");
 }
 
@@ -287,7 +299,6 @@ function onPointerClick() {
 
 
 function intersectsDoor(){
-	// console.log("intersects search for: ", myPointer.value.position);
 	let {x, y} = myPointer.value.position;
 	return x < 3 && x > -3 && y < 2.8 && y > -2.8;
 }
@@ -310,11 +321,11 @@ function getRelativeHeightOnSphere(x, sphereRadius){
 }
 
 function determineDoorTargetAngle(pointerPos){
-	if (!myPointer.value.isDown && !door.value.blockInteraction){
-		door.value.responsiveFactor = MEDIUM_OPEN_SPEED;
-		door.value.targetAngle = intersectsDoor() ? -0.3 : 0;	
-		return;
-	}
+	// if (!myPointer.value.isDown && !door.value.blockInteraction && intersectsDoor()){
+	// 	door.value.responsiveFactor = MEDIUM_OPEN_SPEED;
+	// 	door.value.targetAngle = intersectsDoor() ? -0.1 : 0;	
+	// 	return;
+	// }
 
 
 	if (myPointer.value.stateChanged) {
