@@ -22,16 +22,16 @@
 			</span>
 			<span v-if="data.arrival == 'sraz'"> odkud </span>
 			<select v-if="data.arrival == 'sraz'" v-model="data.transportSraz" class="form-input">
-				<option value="alone">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
-				<option value="arrange">využij{{ isAlone ? "i" : "eme" }} autobus</option>
+				<option value="vlastni">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
+				<option value="autobus">využij{{ isAlone ? "i" : "eme" }} autobus</option>
 			</select>
 			<span v-if="data.arrival == 'sraz'"> na obřad na Chlum. </span>
 			<span class="tw-basis-full tw-h-0"></span>
 			<span> Z Chlumu </span>
 
 			<select v-model="data.transportObrad" class="form-input">
-				<option value="alone">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
-				<option value="arrange">využij{{ isAlone ? "i" : "eme" }} autobus</option>
+				<option value="vlastni">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
+				<option value="autobus">využij{{ isAlone ? "i" : "eme" }} autobus</option>
 			</select>
 
 			<span> na hostinu v Okřížkách. </span>
@@ -39,13 +39,13 @@
 			<span> Přespání </span>
 			<span>
 				<select v-model="data.sleeping" class="form-input">
-					<option value="alone">zařídit nepotřebuj{{ isAlone ? "i" : "eme" }}</option>
-					<option value="arrange">{{ isAlone ? "bych potřeboval" : "bychom potřebovali" }} zařídit</option>
+					<option value="vlastni">zařídit nepotřebuj{{ isAlone ? "i" : "eme" }}</option>
+					<option value="zaridit">{{ isAlone ? "bych potřeboval" : "bychom potřebovali" }} zařídit</option>
 				</select>
 				<span>. </span>
 			</span>
-			<span v-if="data.sleeping == 'arrange'"> Proto přidávám kontakt: </span>
-			<span v-if="data.sleeping == 'arrange'">
+			<span v-if="data.sleeping == 'zaridit'"> Proto přidávám kontakt: </span>
+			<span v-if="data.sleeping == 'zaridit'">
 				<input  v-model="data.contact" type="text" placeholder="tel. číslo nebo email" class="form-input" />
 				<span>. </span>
 			</span>
@@ -116,7 +116,7 @@ const formIsValid = computed(() => {
 		}
 	}
 
-	if (data.value.sleeping == "arrange") {
+	if (data.value.sleeping == "zaridit") {
 		if (!data.value.contact) {
 			return false;
 		}

@@ -18,7 +18,7 @@
 						<div class="tw-text-3xl tw-mb-4 tw-mt-10"><b>Můžeme nechat auto v Horním Smrčném a využít odtud autobus?</b></div>			
 						<div>Určite! S tím se tak nějak počítá. Auto si pak vyzvednete následující den. Ideálně ale auto vůbec neberte a dojeďte vlakem z Třebíče 😊 (viz odpověď výše).</div>			
 						<div class="tw-text-3xl tw-mb-4 tw-mt-10"><b>Platí nějaký dress code?</b></div>			
-						<div>Na ničem nelpíme. Přijď v tom, v čem se budeš cítit nejlépe Ty.</div>			
+						<div>Na ničem nelpíme. Přijďte v tom, v čem se budete cítit nejlépe Vy.</div>			
 					</div>
 					<ConfirmationForm id="potvrzeni" class="tw-max-w-5xl tw-py-8 tw-px-5  tw-m-auto"></ConfirmationForm>
 				</div>
