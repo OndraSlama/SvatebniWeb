@@ -1,5 +1,5 @@
 <template>
-	<div v-if="!allModelsLoaded" class="absolute w-full h-[100vh] flex justify-center items-center ">
+	<div v-if="!allModelsLoaded()" class="absolute w-full h-[100vh] flex justify-center items-center ">
 		<div class="text-center font-[InkFree] text-white ">
 			<img class="w-[100px] h-[100px] m-auto" src="/public/images/loading.gif" />
 			<div class="mt-4 text-4xl">
@@ -123,7 +123,6 @@ function onSignModelLoadReady(model) {
 }
 
 function onDoorModelLoadReady(model) {
-	console.log("Ready");
 	doorModel.value = model;
 	modelFix(model);
 
