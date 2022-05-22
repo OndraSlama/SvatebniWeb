@@ -1,17 +1,17 @@
 <template>
 	<form @submit.prevent="sendForm">
 		<Title>Potvrzeni</Title>
-		<div class="form-line tw-text-center tw-justify-center tw-mb-3 ">
+		<div class="form-line text-center justify-center mb-3 ">
 			<span>Tímto potvrzuji, že přijdu já </span>
-			<input v-model="data.name" type="text" placeholder="Jméno a příjmení" class="form-input tw-w-48" />
+			<input v-model="data.name" type="text" placeholder="Jméno a příjmení" class="form-input w-48" />
 			<span> s </span>
-			<input v-model="data.totalNumber" type="number" placeholder="počet" class="form-input tw-w-20" />
+			<input v-model="data.totalNumber" type="number" placeholder="počet" class="form-input w-20" />
 			<span> {{ isAlone ? "(žádnou)" : "" }} další{{ isPlural ? "mi" : "" }} </span>
 			<span> {{ isPlural ? "lidmi" : "osobou" }}.</span>
 			<span v-if="!isAlone"> Z toho </span>
-			<input v-if="!isAlone" v-model="data.childNumber" type="number" placeholder="počet" class="form-input tw-w-20" />
+			<input v-if="!isAlone" v-model="data.childNumber" type="number" placeholder="počet" class="form-input w-20" />
 			<span v-if="!isAlone"> {{ !data.childNumber ? "žádné ne" : "" }}bud{{ data.childNumber > 1 ? "ou děti" : "e dítě" }}. </span>
-			<span class="tw-basis-full tw-h-0"></span>
+			<span class="basis-full h-0"></span>
 			<span> Přijed{{ isAlone ? "u" : "eme" }} </span>
 			<span>
 				<select v-model="data.arrival" class="form-input">
@@ -26,7 +26,7 @@
 				<option value="autobus">využij{{ isAlone ? "i" : "eme" }} autobus</option>
 			</select>
 			<span v-if="data.arrival == 'sraz'"> na obřad na Chlum. </span>
-			<span class="tw-basis-full tw-h-0"></span>
+			<span class="basis-full h-0"></span>
 			<span> Z Chlumu </span>
 
 			<select v-model="data.transportObrad" class="form-input">
@@ -35,7 +35,7 @@
 			</select>
 
 			<span> na hostinu v Okřížkách. </span>
-			<span class="tw-basis-full"></span>
+			<span class="basis-full"></span>
 			<span> Přespání </span>
 			<span>
 				<select v-model="data.sleeping" class="form-input">
@@ -50,11 +50,11 @@
 				<span>. </span>
 			</span>
 			<br />
-			<span class="tw-w-full tw-mt-5">Vzkaz pro snoubence: </span>
-			<textarea v-model="data.message" placeholder="Např: Chci tatarák. Pivo jedině Bernard." class="form-input tw-max-w-[400px] tw-w-full" />
+			<span class="w-full mt-5">Vzkaz pro snoubence: </span>
+			<textarea v-model="data.message" placeholder="Např: Chci tatarák. Pivo jedině Bernard." class="form-input max-w-[400px] w-full" />
 		</div>
-		<input :disabled="sendingForm || !formIsValid" type="submit" value="Odeslat" class="tw-bg-amber-800 hover:tw-bg-amber-900 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded-md disabled:tw-bg-amber-800/30" />
-		<p v-if="!formIsValid && !formSent" class="tw-text-xs mt-2 tw-text-red-400">Vyplň všechna povinná pole.</p>
+		<input :disabled="sendingForm || !formIsValid" type="submit" value="Odeslat" class="bg-amber-800 hover:bg-amber-900 text-white font-bold py-2 px-4 rounded-md disabled:bg-amber-800/30" />
+		<p v-if="!formIsValid && !formSent" class="text-xs mt-2 text-red-400">Vyplň všechna povinná pole.</p>
 	</form>
 </template>
 
@@ -170,14 +170,14 @@ function onlyNumber($event) {
 
 <style>
 .form-inner-line {
-	@apply tw-flex tw-place-items-center tw-gap-2;
+	@apply flex place-items-center gap-2;
 }
 .form-line {
-	@apply tw-flex tw-place-items-center tw-gap-3 tw-py-2 tw-flex-wrap;
+	@apply flex place-items-center gap-3 py-2 flex-wrap;
 }
 
 .form-input {
-	@apply tw-bg-black tw-bg-opacity-10 tw-px-3 tw-rounded-lg;
+	@apply bg-black bg-opacity-10 px-3 rounded-lg;
 }
 
 input[type="number"]::-webkit-outer-spin-button,

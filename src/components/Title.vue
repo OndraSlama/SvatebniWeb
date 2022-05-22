@@ -1,5 +1,5 @@
 <template>
-	<h1 class="tw-text-7xl lg:tw-text-9xl tw-text-center tw-py-16 lg:tw-py-20  tw-font-[hobbiton] ">
+	<h1 class="text-7xl lg:text-9xl text-center py-16 lg:py-20  font-[hobbiton] ">
 		<slot></slot>
 	</h1>
 </template>

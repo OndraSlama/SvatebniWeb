@@ -1,5 +1,5 @@
 <template>
-	<div class="lg:tw-absolute tw-p-4 tw-backdrop-blur-sm tw-bg-white/40 tw-text-lg tw-font-[InkFree]">
+	<div class="lg:absolute p-4 backdrop-blur-sm bg-white/40 text-lg font-[InkFree]">
 		<slot></slot>
 	</div>
 </template>

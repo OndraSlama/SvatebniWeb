@@ -1,13 +1,13 @@
 <template>
 		
 		<Title>Svatebni den</Title>
-		<!-- <div class="tw-text-center tw-text-2xl tw-mt-[-50px]"> Najetím na sekce zobrazíš další info.</div> -->
-		<div class="tw-flex tw-flex-col lg:tw-flex-row tw-gap-3 tw-relative tw-justify-center tw-items-center tw-pb-16 lg:tw-pt-10 tw-px-4">
-			<MapDescription v-slot="{expanded}" class="lg:tw-mb-[780px] lg:tw-ml-[-500px] xl:tw-ml-[-680px]"> 
+		<!-- <div class="text-center text-2xl mt-[-50px]"> Najetím na sekce zobrazíš další info.</div> -->
+		<div class="flex flex-col lg:flex-row gap-3 relative justify-center items-center pb-16 lg:pt-10 px-4">
+			<MapDescription v-slot="{expanded}" class="lg:mb-[780px] lg:ml-[-500px] xl:ml-[-680px]"> 
 
-				<div class="tw-text-3xl xl:tw-text-4xl">Sraz v Horním smrčném</div>
+				<div class="text-3xl xl:text-4xl">Sraz v Horním smrčném</div>
 				<ul>
-					<li  class="tw-my-2 xl:tw-text-xl"> <b>10:00 sraz u nevěsty</b></li>
+					<li  class="my-2 xl:text-xl"> <b>10:00 sraz u nevěsty</b></li>
 					<li  v-if="expanded"> <b>Zdobení aut, Vývazkování svatebčanů, Něco malého k zakousnutí</b> </li>
 				</ul>
 
@@ -15,25 +15,25 @@
 				
 			</MapDescription>
 
-			<MapDescription v-slot="{expanded}"  class="lg:tw-mb-[820px] xl:tw-top-[20py] lg:tw-ml-[300px]"> 
-				<div  class="tw-text-3xl xl:tw-text-4xl">
+			<MapDescription v-slot="{expanded}"  class="lg:mb-[820px] xl:top-[20py] lg:ml-[300px]"> 
+				<div  class="text-3xl xl:text-4xl">
 					Autobusem na obřad
 				</div> 
 				<ul>
-					<li  class="tw-my-2 xl:tw-text-xl"> <b>11:30 společný přejezd na Chlum</b></li>
+					<li  class="my-2 xl:text-xl"> <b>11:30 společný přejezd na Chlum</b></li>
 				</ul>
 				<div v-if="expanded">
 					Ti, kteří nedisponují vlastními auty nebo si rádi přihnou již před polednem, je vypraven na přejezd na obřad autobus
 				</div>
 			</MapDescription>
 
-			<MapDescription v-slot="{expanded}" class="lg:tw-mb-[150px] lg:tw-ml-[250px]"> 
-				<div  class="tw-text-3xl xl:tw-text-4xl">
+			<MapDescription v-slot="{expanded}" class="lg:mb-[150px] lg:ml-[250px]"> 
+				<div  class="text-3xl xl:text-4xl">
 					Obřad na Chlumě
 				</div> 
 				<ul>
-					<li  class="tw-my-2 xl:tw-text-xl"> <b>12:00 obřad</b></li>
-					<li  class="tw-my-2 xl:tw-text-xl"> <b>13:30 focení</b></li>
+					<li  class="my-2 xl:text-xl"> <b>12:00 obřad</b></li>
+					<li  class="my-2 xl:text-xl"> <b>13:30 focení</b></li>
 				</ul>
 				<div  v-if="expanded">
 					Přesně v poledne se se slibem, výměnou prstýků a stvrzením podpisem (snad postačí inkoust), se novomanželé společně vydají na další dobrodružství. 
@@ -42,28 +42,28 @@ Aby vzpomínky na tento den zůstaly uchovány nejen v našich pamětích, bude 
 				</div>
 			</MapDescription>
 
-			<MapDescription v-slot="{expanded}" class="lg:tw-mb-[200px] lg:tw-ml-[-470px] xl:tw-ml-[-650px]" > 
-				<div  class="tw-text-3xl xl:tw-text-4xl">
+			<MapDescription v-slot="{expanded}" class="lg:mb-[200px] lg:ml-[-470px] xl:ml-[-650px]" > 
+				<div  class="text-3xl xl:text-4xl">
 					Cestou necestou
 				</div> 
 				<ul>
-					<li  class="tw-my-2 xl:tw-text-xl"> <b>14:30 přejezd na hostinu</b></li>
+					<li  class="my-2 xl:text-xl"> <b>14:30 přejezd na hostinu</b></li>
 				</ul>
 				<div v-if="expanded">
 					Ti zvás, kteří již ochutnali vzorky domácích pálenk a jiných alkoholických nápojů, nemáte nyní jinou možnost, než k přepravě využít připravený autobus. Ti zvás, kteří jste se s námi sešli až na Chlumě, do navigace si zadejte adresu: Jihlavská 76, Okříšky.
 				</div>
 			</MapDescription>
 
-			<MapDescription v-slot="{expanded}" class="lg:tw-mb-[-680px] lg:tw-ml-[110px]"> 
-				<div  class="tw-text-3xl xl:tw-text-4xl">
+			<MapDescription v-slot="{expanded}" class="lg:mb-[-680px] lg:ml-[110px]"> 
+				<div  class="text-3xl xl:text-4xl">
 					Hostina a párty v Okříškách
 				</div> 
 				<ul>
-					<li  class="tw-my-2 xl:tw-text-xl"> <b>15:00 hostina</b></li>
-					<li v-if="expanded"  class="tw-my-2 xl:tw-text-xl"> <b>16:00 dort</b></li>
-					<li v-if="expanded"  class="tw-my-2 xl:tw-text-xl"> <b>16:30 první tanec</b></li>
-					<li v-if="expanded"  class="tw-my-2 xl:tw-text-xl"> <b>17:00 kytice</b></li>
-					<li  class="tw-my-2 xl:tw-text-xl"> <b>18:30 raut</b></li>
+					<li  class="my-2 xl:text-xl"> <b>15:00 hostina</b></li>
+					<li v-if="expanded"  class="my-2 xl:text-xl"> <b>16:00 dort</b></li>
+					<li v-if="expanded"  class="my-2 xl:text-xl"> <b>16:30 první tanec</b></li>
+					<li v-if="expanded"  class="my-2 xl:text-xl"> <b>17:00 kytice</b></li>
+					<li  class="my-2 xl:text-xl"> <b>18:30 raut</b></li>
 				</ul>
 				<div v-if="expanded">
 					<p>
@@ -82,9 +82,9 @@ Aby vzpomínky na tento den zůstaly uchovány nejen v našich pamětích, bude 
 			</MapDescription>
 
 
-			<div class="tw-flex tw-justify-center tw-mt-14 lg:tw-mt-0">
-				<img class="max-w-[300px] tw-hidden lg:tw-block" src="./../assets/map/mapa.svg" />
-				<img class="max-w-[300px] lg:tw-hidden" src="./../assets/map/mapa_mobil.svg" />
+			<div class="flex justify-center mt-14 lg:mt-0">
+				<img class="max-w-[500px] w-max hidden lg:block" src="./../assets/map/mapa.svg" />
+				<img class="max-w-[300px] w-max lg:hidden" src="./../assets/map/mapa_mobil.svg" />
 			</div>
 		</div>
 </template>
