@@ -31,9 +31,9 @@ let windowWidth = ref(window.innerWidth);
 console.log(windowWidth.value);
 const image_source = computed(() => {
 	if (windowWidth.value > 768) {
-		return "/public/images/hero_image.jpg";
+		return "https://i.ibb.co/1MHVkTt/hero-image.jpg";
 	} else {
-		return "/public/images/hero_image_mobile.jpg";
+		return "https://i.ibb.co/qrbsMpD/hero-image-mobile.jpg";
 	}
 });
 </script>
