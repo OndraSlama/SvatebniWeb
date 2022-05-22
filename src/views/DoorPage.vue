@@ -40,7 +40,7 @@ const DEFAULT_CAMERA_POSITION = { x: 0, y: 0, z: 20 };
 const DEFAULT_LIGHT_POSITION = { x: -5, y: 3, z: 20 };
 const MODELS_X_OFFSET = -2.83;
 const SIGN_X_OFFEST = 4.15;
-const SLOW_OPEN_SPEED = 0.01;
+const SLOW_OPEN_SPEED = 0.02;
 const MEDIUM_OPEN_SPEED = 0.05;
 const FAST_OPEN_SPEED = 0.1;
 const AUTOOPEN_TIME = 1000 * 60 * 5; // 5 minutes
@@ -107,10 +107,10 @@ function calculatePhysics() {
 	sign.value.targetAngle += sign.value.angleSpeed * (TIMER_PERIOD / 1000);
 }
 
-const doorModel = ref();
-const treesModel = ref();
-const signModel = ref();
-const rotationPlane = ref();
+const doorModel = ref(undefined);
+const treesModel = ref(undefined);
+const signModel = ref(undefined);
+const rotationPlane = ref(undefined);
 
 function onTreesModelLoadReady(model) {
 	treesModel.value = model;
@@ -135,7 +135,7 @@ function onDoorModelLoadReady(model) {
 	setTimeout(() => {
 		camera.value.position = { ...DEFAULT_CAMERA_POSITION };
 		door.value.targetAngle = 0;
-	}, 1500);
+	}, 300);
 
 	setTimeout(() => {
 		door.value.blockInteraction = false;
@@ -174,7 +174,7 @@ const door = ref({
 const camera = ref({
 	targetPosition: { x: 0, y: 0, z: 0 },
 	zoomIntegrationFactor: 0,
-	moveFactor: 0.05,
+	moveFactor: 0.03,
 });
 
 const sign = ref({
@@ -263,7 +263,7 @@ watch(
 	(newValue) => {
 		if (newValue) {
 			cameraTimer = setInterval(() => {
-				camera.value.zoomIntegrationFactor -= 0.002;
+				camera.value.zoomIntegrationFactor -= 0.01;
 			}, 50);
 		} else {
 			camera.value.zoomIntegrationFactor = 0;
