@@ -1,13 +1,6 @@
 {
-	"headers": [
-	  {
-		"source": "/(.*)",
-		"headers" : [
-		  {
-			"key" : "s-maxage",
-			"value" : "0"
-		  }
-		]
-	  }
-	]
-  }
+	"rewrites": [{
+		"source": "/:path*",
+		"destination": "/index.html"
+	}]
+}
