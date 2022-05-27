@@ -1,11 +1,12 @@
 <template>
 		
-		<Title>Svatebni den</Title>
-		<!-- <div class="text-center text-2xl mt-[-50px]"> Najetím na sekce zobrazíš další info.</div> -->
+		<Title class="pt-16 lg:pt-32">Svatebni den</Title>
+		<div class="hidden lg:block text-center text-2xl mt-[-50px] mb-10"> Najetím myší na jednotlivé sekce zobrazíš další info.</div>
+		<div class="lg:hidden text-center text-xl mt-[-50px] mb-16"> Kliknutím na jednotlivé sekce zobrazíš další info.</div>
 		<div class="flex flex-col lg:flex-row gap-3 relative justify-center items-center pb-16 lg:pt-10 px-4">
 			<MapDescription v-slot="{expanded}" class="lg:mb-[780px] lg:ml-[-500px] xl:ml-[-680px]"> 
 
-				<div class="text-3xl xl:text-4xl">Sraz v Horním smrčném</div>
+				<div class="text-3xl xl:text-4xl">Sraz v Horním Smrčném</div>
 				<ul>
 					<li  class="my-2 xl:text-xl"> <b>10:00 sraz u nevěsty</b></li>
 					<li  v-if="expanded"> <b>Zdobení aut, Vývazkování svatebčanů, Něco malého k zakousnutí</b> </li>

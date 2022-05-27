@@ -16,26 +16,32 @@ const props = defineProps({
 });
 
 const expanded = ref(false);
-const classes = computed(() => [
-		"transition",
-		"overflow-clip",
-		"ease-in-out",
-		"shadow-md",
-		"rounded-lg",
-		"hover:shadow-xl",
-		"hover:-translate-y-1",
-		"hover:z-50",
-		"w-full",
-		"lg:w-[250px]",
-		"xl:w-[400px]",
-		"lg:left-1/2",
-		"lg:absolute",
-		"p-4",
-		"backdrop-blur-sm",
-		"bg-white/30",
-		"hover:bg-white/70",
-		"text-lg"		
-		]);
+const classes = computed(() => {
+	let c = [
+			"transition",
+			"overflow-clip",
+			"ease-in-out",
+			"shadow-md",
+			"rounded-lg",
+			"w-full",
+			"lg:w-[250px]",
+			"xl:w-[400px]",
+			"lg:left-1/2",
+			"lg:absolute",
+			"p-4",
+			"backdrop-blur-sm",
+			"bg-white/30",
+			"text-lg"
+		]
+		if (expanded.value) {
+			c.push("shadow-xl");
+			c.push("-translate-y-1");
+			c.push("z-50");
+			c.push("bg-white/70");
+		}
+		return c
+}
+);
 
 const unset_expanded = () => {
 	setTimeout(() => {
