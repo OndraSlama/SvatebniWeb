@@ -166,7 +166,7 @@ function sendForm() {
 			if (result == "Error") {
 				alert("Omlouváme se, ale něco se pokazilo. Potvrzení účasti se nedalo zpracovat. Zkontroluj data a zkus to prosím znovu.");
 			} else {
-				alert("Děkuji za odeslání formuláře. Potvrzení účasti přijato.");
+				alert("Děkujeme za odeslání formuláře. Potvrzení účasti přijato.");
 				formSent.value = true;
 				initializeForm();
 			}
