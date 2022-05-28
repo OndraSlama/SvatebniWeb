@@ -1,7 +1,7 @@
 <template>
 	<form @submit.prevent="sendForm">
 		<Title>Potvrzeni</Title>
-		<div class="form-line text-center justify-center mb-3 ">
+		<div class="form-line text-center justify-center mb-3">
 			<span>Tímto potvrzuji, že přijdu já </span>
 			<input v-model="data.name" type="text" placeholder="Jméno a příjmení" class="form-input w-48" />
 			<span> s </span>
@@ -46,7 +46,7 @@
 			</span>
 			<span v-if="data.sleeping == 'zaridit'"> Proto přidávám kontakt: </span>
 			<span v-if="data.sleeping == 'zaridit'">
-				<input  v-model="data.contact" type="text" placeholder="tel. číslo nebo email" class="form-input" />
+				<input v-model="data.contact" type="text" placeholder="tel. číslo nebo email" class="form-input" />
 				<span>. </span>
 			</span>
 			<br />
@@ -56,6 +56,10 @@
 		<input :disabled="sendingForm || !formIsValid" type="submit" value="Odeslat" class="bg-amber-800 hover:bg-amber-900 text-white font-bold py-2 px-4 rounded-md disabled:bg-amber-800/30" />
 		<p v-if="!formIsValid && !formSent" class="text-xs mt-2 text-red-400">Vyplň všechna povinná pole.</p>
 	</form>
+	<teleport to="body">
+		<img v-if="showVideo" class="shadow-xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50" :src="clickNiceGifSource()"/>
+	</teleport>
+
 </template>
 
 <script setup>
@@ -77,6 +81,22 @@ function initializeForm() {
 	};
 }
 initializeForm();
+
+var clickNiceAudio = new Audio('/assets/clicknice.mp3'); // path to file
+
+const showVideo = ref(false);
+function playClickNice() {
+	clickNiceAudio.play();
+	showVideo.value = true;
+
+	setTimeout(() => {
+		showVideo.value = false;
+	}, 2200);
+}
+
+const clickNiceGifSource = () => {
+	return '/assets/clicknice.gif?' + Math.random()
+};
 
 let isPlural = computed(() => data.value.totalNumber > 1);
 let isAlone = computed(() => !data.value.totalNumber);
@@ -126,6 +146,7 @@ const formIsValid = computed(() => {
 });
 
 function sendForm() {
+	playClickNice();
 	sendingForm.value = true;
 
 	if (!formIsValid.value) {
