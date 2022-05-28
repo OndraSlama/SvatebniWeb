@@ -37,7 +37,7 @@
 					<li  class="my-2 xl:text-xl"> <b>13:30 focení</b></li>
 				</ul>
 				<div  v-if="expanded">
-					Přesně v poledne se se slibem, výměnou prstýků a stvrzením podpisem (snad postačí inkoust), se novomanželé společně vydají na další dobrodružství. 
+					Přesně v poledne se se slibem, výměnou prstýků a stvrzením podpisem (snad postačí inkoust), novomanželé společně vydají na další dobrodružství. 
 Aby vzpomínky na tento den zůstaly uchovány nejen v našich pamětích, bude po obřadu probíhat společné focení.
 
 				</div>
