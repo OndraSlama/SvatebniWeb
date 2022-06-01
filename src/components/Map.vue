@@ -24,7 +24,7 @@
 					<li  class="my-2 xl:text-xl"> <b>11:30 společný přejezd na Chlum</b></li>
 				</ul>
 				<div v-if="expanded">
-					Ti, kteří nedisponují vlastními auty nebo si rádi přihnou již před polednem, je vypraven na přejezd na obřad autobus
+					Pro ty, kteří nedisponují vlastními auty nebo si rádi přihnou již před polednem, je vypraven na přejezd na obřad autobus
 				</div>
 			</MapDescription>
 

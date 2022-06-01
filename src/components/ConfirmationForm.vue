@@ -1,64 +1,66 @@
 <template>
-	<form @submit.prevent="sendForm">
-		<Title>Potvrzeni</Title>
-		<div class="form-line text-center justify-center mb-3">
-			<span>Tímto potvrzuji, že přijdu já </span>
-			<input v-model="data.name" type="text" placeholder="Jméno a příjmení" class="form-input w-48" />
-			<span> s </span>
-			<input v-model="data.totalNumber" type="number" placeholder="počet" class="form-input w-20" />
-			<span> {{ isAlone ? "(žádnou)" : "" }} další{{ isPlural ? "mi" : "" }} </span>
-			<span> {{ isPlural ? "lidmi" : "osobou" }}.</span>
-			<span v-if="!isAlone"> Z toho </span>
-			<input v-if="!isAlone" v-model="data.childNumber" type="number" placeholder="počet" class="form-input w-20" />
-			<span v-if="!isAlone"> {{ !data.childNumber ? "žádné ne" : "" }}bud{{ data.childNumber > 1 ? "ou děti" : "e dítě" }}. </span>
-			<span class="basis-full h-0"></span>
-			<span> Přijed{{ isAlone ? "u" : "eme" }} </span>
-			<span>
-				<select v-model="data.arrival" class="form-input">
-					<option value="sraz">na sraz do Horního Smrčného</option>
-					<option value="obrad">až na obřad na Chlumě</option>
+	<div>
+		<form @submit.prevent="sendForm">
+			<Title>Potvrzeni</Title>
+			<div class="form-line text-center justify-center mb-3">
+				<span>Tímto potvrzuji, že přijdu já </span>
+				<input v-model="data.name" type="text" placeholder="Jméno a příjmení" class="form-input w-48" />
+				<span> s </span>
+				<input v-model="data.totalNumber" type="number" placeholder="počet" class="form-input w-20" />
+				<span> {{ isAlone ? "(žádnou)" : "" }} další{{ isPlural ? "mi" : "" }} </span>
+				<span> {{ isPlural ? "lidmi" : "osobou" }}.</span>
+				<span v-if="!isAlone"> Z toho </span>
+				<input v-if="!isAlone" v-model="data.childNumber" type="number" placeholder="počet" class="form-input w-20" />
+				<span v-if="!isAlone"> {{ !data.childNumber ? "žádné ne" : "" }}bud{{ data.childNumber > 1 ? "ou děti" : "e dítě" }}. </span>
+				<span class="basis-full h-0"></span>
+				<span> Přijed{{ isAlone ? "u" : "eme" }} </span>
+				<span>
+					<select v-model="data.arrival" class="form-input">
+						<option value="sraz">na sraz do Horního Smrčného</option>
+						<option value="obrad">až na obřad na Chlumě</option>
+					</select>
+					<span v-if="data.arrival != 'sraz'">.</span>
+				</span>
+				<span v-if="data.arrival == 'sraz'"> odkud </span>
+				<select v-if="data.arrival == 'sraz'" v-model="data.transportSraz" class="form-input">
+					<option value="vlastni">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
+					<option value="autobus">využij{{ isAlone ? "i" : "eme" }} autobus</option>
 				</select>
-				<span v-if="data.arrival != 'sraz'">.</span>
-			</span>
-			<span v-if="data.arrival == 'sraz'"> odkud </span>
-			<select v-if="data.arrival == 'sraz'" v-model="data.transportSraz" class="form-input">
-				<option value="vlastni">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
-				<option value="autobus">využij{{ isAlone ? "i" : "eme" }} autobus</option>
-			</select>
-			<span v-if="data.arrival == 'sraz'"> na obřad na Chlum. </span>
-			<span class="basis-full h-0"></span>
-			<span> Z Chlumu </span>
+				<span v-if="data.arrival == 'sraz'"> na obřad na Chlum. </span>
+				<span class="basis-full h-0"></span>
+				<span> Z Chlumu </span>
 
-			<select v-model="data.transportObrad" class="form-input">
-				<option value="vlastni">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
-				<option value="autobus">využij{{ isAlone ? "i" : "eme" }} autobus</option>
-			</select>
-
-			<span> na hostinu v Okřížkách. </span>
-			<span class="basis-full"></span>
-			<span> Přespání </span>
-			<span>
-				<select v-model="data.sleeping" class="form-input">
-					<option value="vlastni">zařídit nepotřebuj{{ isAlone ? "i" : "eme" }}</option>
-					<option value="zaridit">{{ isAlone ? "bych potřeboval" : "bychom potřebovali" }} zařídit</option>
+				<select v-model="data.transportObrad" class="form-input">
+					<option value="vlastni">se dopravím{{ isAlone ? " sám" : "e sami" }}</option>
+					<option value="autobus">využij{{ isAlone ? "i" : "eme" }} autobus</option>
 				</select>
-				<span>. </span>
-			</span>
-			<span v-if="data.sleeping == 'zaridit'"> Proto přidávám kontakt: </span>
-			<span v-if="data.sleeping == 'zaridit'">
-				<input v-model="data.contact" type="text" placeholder="tel. číslo nebo email" class="form-input" />
-				<span>. </span>
-			</span>
-			<br />
-			<span class="w-full mt-5">Vzkaz pro snoubence: </span>
-			<textarea v-model="data.message" placeholder="Např: Chci tatarák. Pivo jedině Bernard." class="form-input max-w-[400px] w-full" />
-		</div>
-		<input :disabled="sendingForm || !formIsValid" type="submit" value="Odeslat" class="bg-amber-800 hover:bg-amber-900 text-white font-bold py-2 px-4 rounded-md disabled:bg-amber-800/30" />
-		<p v-if="!formIsValid && !formSent" class="text-xs mt-2 text-red-400">Vyplň všechna povinná pole.</p>
-	</form>
-	<teleport to="body">
-		<img v-if="showVideo" class="shadow-xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50" :src="clickNiceGifSource()"/>
-	</teleport>
+
+				<span> na hostinu v Okřížkách. </span>
+				<span class="basis-full"></span>
+				<span> Přespání </span>
+				<span>
+					<select v-model="data.sleeping" class="form-input">
+						<option value="vlastni">zařídit nepotřebuj{{ isAlone ? "i" : "eme" }}</option>
+						<option value="zaridit">{{ isAlone ? "bych potřeboval" : "bychom potřebovali" }} zařídit</option>
+					</select>
+					<span>. </span>
+				</span>
+				<span v-if="data.sleeping == 'zaridit'"> Proto přidávám kontakt: </span>
+				<span v-if="data.sleeping == 'zaridit'">
+					<input v-model="data.contact" type="text" placeholder="tel. číslo nebo email" class="form-input" />
+					<span>. </span>
+				</span>
+				<br />
+				<span class="w-full mt-5">Vzkaz pro snoubence: </span>
+				<textarea v-model="data.message" placeholder="Např: Chci tatarák. Pivo jedině Bernard." class="form-input max-w-[400px] w-full" />
+			</div>
+			<input :disabled="sendingForm || !formIsValid" type="submit" value="Odeslat" class="bg-amber-800 hover:bg-amber-900 text-white font-bold py-2 px-4 rounded-md disabled:bg-amber-800/30" />
+			<p v-if="!formIsValid && !formSent" class="text-xs mt-2 text-red-400">Vyplň všechna povinná pole.</p>
+		</form>
+		<teleport to="body">
+			<img v-if="showVideo" class="shadow-xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50" :src="clickNiceGifSource()"/>
+		</teleport>
+	</div>
 
 </template>
 
