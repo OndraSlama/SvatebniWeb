@@ -35,7 +35,7 @@
 					<option value="autobus">využij{{ isAlone ? "i" : "eme" }} autobus</option>
 				</select>
 
-				<span> na hostinu v Okřížkách. </span>
+				<span> na hostinu v Okříškách. </span>
 				<span class="basis-full"></span>
 				<span> Přespání </span>
 				<span>
