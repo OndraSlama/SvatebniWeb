@@ -43,7 +43,7 @@ const SIGN_X_OFFEST = 4.15;
 const SLOW_OPEN_SPEED = 0.02;
 const MEDIUM_OPEN_SPEED = 0.05;
 const FAST_OPEN_SPEED = 0.1;
-const AUTOOPEN_TIME = 1000 * 60 * 5; // 5 minutes
+const AUTOOPEN_TIME = 1000 * 30; // 30 sec
 
 const TIMER_PERIOD = 20; // milliseconds
 const SIGN_ANGLE_FIX_FACTOR = 4.34;
