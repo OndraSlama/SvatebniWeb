@@ -13,7 +13,7 @@
 					<div class="text-3xl mb-4"><b>Jak se můžeme dopravit na sraz k nevěstě do Horního Smrčného?</b></div>
 					<div>Na sraz se každý dopraví vlastní cestou. Na parkování bude místa dost. Můžete dojet i vlakem <a class="underline text-blue-500" href="https://idos.idnes.cz/vlakyautobusymhdvse/spojeni/prehled/?p=Fyb5SSWpsOpfNdTbad2ENK5UbPC5ckqikZtrmBdMqBI1GDvK1bglAtBH7vVJYPx72YFcRMS6PfNli5xjWUTM1w--">z Třebíče do Přímělkova</a> odkud už jsme schopní po předchozí domluvě zařídit dovoz.</div>
 					<div class="text-3xl mb-4 mt-10"><b>Můžeme nechat auto v Horním Smrčném a využít odtud autobus?</b></div>
-					<div>Určitě! S tím se tak nějak počítá. Auto si pak vyzvednete následující den. Ideálně ale auto vůbec neberte a dojeďte vlakem z Třebíče 😊 (viz odpověď výše).</div>
+					<div>Určitě! S tím se tak nějak počítá. Auto si pak vyzvednete následující den. Ideálně ale auto vůbec neberte a nechte se dovést nebo dojeďte vlakem z Třebíče 😊 (viz odpověď výše).</div>
 					<div class="text-3xl mb-4 mt-10"><b>Kde přesně je v Horním Smrčném sraz?</b></div>
 					<div>Sejdeme se na dvorku u <a class="underline text-blue-500" href="https://maps.app.goo.gl/GTBUVDr1QL9sHb197">domu s č.p. 23</a>. Od točny autobusu, kde můžete nechat zaparkované auto, půjdete kousek nahoru do kopce po cestě. Tam už nás najdete.</div>
 					<div class="text-3xl mb-4 mt-10"><b>Platí pozvání i pro partnera/děti?</b></div>
