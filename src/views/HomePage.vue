@@ -20,6 +20,8 @@
 					<div>Ano. Pokud jste dostali pozvánku ke svatebnímu stolu, jsou srdečně vítání jak děti tak i vaše +1. Poprosíme jen o uvedení počtu hostů ve <router-link to="#potvrzeni" class="underline text-blue-500"> <b>formuláři níže</b></router-link>. </div>
 					<div class="text-3xl mb-4 mt-10"><b>Platí nějaký dress code?</b></div>
 					<div>Na ničem nelpíme. Přijďte v tom, v čem se budete cítit nejlépe Vy.</div>
+					<div class="text-3xl mb-4 mt-10"><b>Kdo bude na svatbě hrát?</b></div>
+					<div>Na svatbě nám zahraje kapela <a class="underline text-blue-500" href="https://www.blueband.cz/kapela-na-svatbu/">Blue Band</a>.</div>
 				</div>
 				<ConfirmationForm id="potvrzeni" class="max-w-5xl py-8 px-5 m-auto"></ConfirmationForm>
 			</div>
