@@ -1,5 +1,5 @@
 <template>
-	<div @mouseenter="set_expanded" @mouseleave="unset_expanded" :class="classes">
+	<div @mouseenter="set_expanded" @click="set_expanded" @mouseleave="unset_expanded" :class="classes">
 		<slot :expanded="expanded"></slot>
 		<!-- <div v-if="expandable && !expanded" class="text-center text-4xl bg">...</div> -->
 	</div>

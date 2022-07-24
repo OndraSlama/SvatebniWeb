@@ -12,7 +12,7 @@
 					<li  v-if="expanded"> <b>Zdobení aut, Vývazkování svatebčanů, Něco malého k zakousnutí</b> </li>
 				</ul>
 
-				<div v-if="expanded">Obec Horní Smrčné je jedna z nejmenších vesniček na Vysočině. Co ji chybí do velikosti, rozhodně ji nechybí do krásy. Navzdory tomu, že něvěsta pochází z Přibyslavic, okouzlena malebností této vesničky již od dob, kdy zde u prarodičů trávila prázdniny, rozhodala se vydat na další životní etapu právě odsud.</div>
+				<div v-if="expanded">Obec Horní Smrčné je jedna z nejmenších vesniček na Vysočině. Co ji chybí do velikosti, rozhodně ji nechybí do krásy. Navzdory tomu, že nevěsta pochází z Přibyslavic, okouzlena malebností této vesničky již od dob, kdy zde u prarodičů trávila prázdniny, rozhodla se vydat na další životní etapu právě odsud.</div>
 				
 			</MapDescription>
 
@@ -51,7 +51,7 @@ Aby vzpomínky na tento den zůstaly uchovány nejen v našich pamětích, bude 
 					<li  class="my-2 xl:text-xl"> <b>14:30 přejezd na hostinu</b></li>
 				</ul>
 				<div v-if="expanded">
-					Ti zvás, kteří již ochutnali vzorky domácích pálenk a jiných alkoholických nápojů, nemáte nyní jinou možnost, než k přepravě využít připravený autobus. Ti zvás, kteří jste se s námi sešli až na Chlumě, do navigace si zadejte adresu: Jihlavská 76, Okříšky.
+					Ti zvás, kteří již ochutnali vzorky domácích pálenek a jiných alkoholických nápojů, nemáte nyní jinou možnost, než k přepravě využít připravený autobus. Ti zvás, kteří jste se s námi sešli až na Chlumě, do navigace si zadejte adresu: Jihlavská 76, Okříšky.
 				</div>
 			</MapDescription>
 
@@ -71,7 +71,7 @@ Aby vzpomínky na tento den zůstaly uchovány nejen v našich pamětích, bude 
 						Protože jak se tak říká, láska prochází žaludkem a před dobrou párty je potřeba mít kvalitní základ, nebude chybět vývar s knedličkama, svíčková ani kus svatebního dortu. Pokud to plné žaludky dovolí, bude následovat první tanec novomanželů.
 					</p>  
 					<p>
-						O trochu vzrušení svobodných slečen se postará nejen Michal Monínec, ale i hod svatební kyticí. Po všech tanečních čísel bude třeba znovu doplnit energii, takže je připraven i raut plný dobrot. 
+						O trochu vzrušení svobodných slečen se postará nejen Michal Monínec, ale i hod svatební kyticí. Po všech tanečních čislech bude třeba znovu doplnit energii, takže je připraven i raut plný dobrot. 
 	
 					</p> 
 					<p>
