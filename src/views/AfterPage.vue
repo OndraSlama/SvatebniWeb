@@ -12,9 +12,8 @@
 				<br>
 				<Title>Reference</Title>
 				<div class="px-4"> Za skvěle odvedenou práci by jsme se chtěli odvděčit alespoň malou zmínkou zde na naší stránce. Všechny vás proto prosíme o chvilinku času k prohlédnutí těchto profilů a jejich podpoření likem/follow/sdílením. Děkujeme! 
-					<br>
-					<br>
-					<ul>
+					
+					<ul class="mt-16">
 						<li  class="text-3xl mb-4">Výzdoba a atmosféra svatby - Peťa <a class="underline text-blue-500" href="https://www.instagram.com/petrus_dilna/?hl=cs">@petrus_dilna</a> </li>
 						<li  class="text-3xl mb-4">Motýlky, výrobky ze dřeva - Josefína <a class="underline text-blue-500" href="https://www.instagram.com/james_wood_lab/?hl=cs">@james_wood_lab</a> </li>
 						<li  class="text-3xl mb-4">Šaty na míru pro svědkyni - Verunka <a class="underline text-blue-500" href="https://www.instagram.com/satenky/?hl=cs">@satenky</a> </li>
