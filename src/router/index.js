@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import DoorPage from "../views/DoorPage.vue";
 import HomePage from "../views/HomePage.vue";
+import AfterPage from "../views/AfterPage.vue";
 import NotFound from "../views/NotFoundPage.vue";
 
 const routes = [
@@ -10,9 +11,14 @@ const routes = [
     component: DoorPage,
   },
   {
-    path: "/svatba",
+    path: "/pred_svatbou",
     name: "Home",
     component: HomePage,
+  },
+  {
+    path: "/svatba",
+    name: "Po svatbe",
+    component: AfterPage,
   },
   {
 	path: "/:catchAll(.*)",

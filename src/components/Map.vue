@@ -1,7 +1,7 @@
 <template>
 		
 		<Title class="pt-16 lg:pt-32">Svatebni den</Title>
-		<div class="hidden lg:block text-center text-2xl mt-[-50px] mb-10"> Najetím myší na jednotlivé sekce zobrazíš další info.</div>
+		<div class="hidden lg:block text-center text-3xl mt-[-50px] mb-10"> Najetím myší na jednotlivé sekce zobrazíš další info.</div>
 		<div class="lg:hidden text-center text-xl mt-[-50px] mb-16"> Kliknutím na jednotlivé sekce zobrazíš další info.</div>
 		<div class="flex flex-col lg:flex-row gap-3 relative justify-center items-center pb-16 lg:pt-10 px-4">
 			<MapDescription v-slot="{expanded}" class="lg:mb-[780px] lg:ml-[-500px] xl:ml-[-680px]"> 

@@ -24,7 +24,11 @@
 					<div>Na svatbě nám zahraje kapela <a class="underline text-blue-500" href="https://www.blueband.cz/kapela-na-svatbu/">Blue Band</a>.</div>
 				</div>
 				<ConfirmationForm id="potvrzeni" class="max-w-5xl py-8 px-5 m-auto"></ConfirmationForm>
+				<div class="text-1xl mt-20 mb-4">
+					<router-link class="underline text-blue-500" to="/svatba" >Aktuální verze stránky</router-link>
+				</div>
 			</div>
+
 
 			<!-- <v-container> -->
 			<!-- </v-container> -->
